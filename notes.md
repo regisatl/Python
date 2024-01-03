@@ -14,3 +14,5 @@ En résumé nous avons quatre grandes méthodes de formatage de texte:
 - le formatage avec la méthodes f qui consiste à mettre f au début de la chaîne avec les variables entre accolades
 
 Une séquences
+
+Les données dans un tuples peut être uniquement lu, elles ne peuvent pas être modifiées ni supprimées

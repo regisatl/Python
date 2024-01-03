@@ -14,3 +14,20 @@
 
 # for i in range(10):
 #     print((i +1 )**2)
+
+# Les lists
+
+# tab = ["Ted", 24, True, range (15)]
+
+# tab = ("Ted", 24, True, range (15))
+
+# print(tab)
+# print(tab[3])
+
+# for i in tab:
+#       if type(i) == str:
+#         print(i.upper())
+#       elif type(i) == int:
+#         print(i ** 2)
+#       else: 
+#         print(i)
