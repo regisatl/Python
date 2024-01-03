@@ -1,7 +1,16 @@
-nom = "Doe"
-prenom = "Jane"
-age = 23
+# nom = input("Votre nom svp !")
+# loop  = True
 
-nom_complet = prenom+" "+nom
+# while loop :
+#       if nom : 
+#             print(f"bonjour {nom}, comment allez vous aujourd'hui !")
+#             loop = False
+#       else:
+#             nom = input("Votre nom svp !")
 
-print( "Je m'appelle %s %s  et j'ai %d  ans"% (prenom, nom, age))
+# afficher une liste ordonnée de 10 chiffres
+
+# loop = True
+
+# for i in range(10):
+#     print((i +1 )**2)
