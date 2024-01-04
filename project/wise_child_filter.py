@@ -20,7 +20,7 @@ nom = ""
 age = 9
 sage = False
 
-if age <= 10 and sage == True :
+if age <= 10 and sage :
       print(f"Félicitation {nom} tu as été sage, le père Noël attend impatiemment ta lettre")
 else : 
       print(f"Désolé {nom} tu n'as pas été sage cette abbéen papa Noël n'est pas content de toi")
