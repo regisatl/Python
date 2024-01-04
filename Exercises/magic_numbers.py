@@ -4,8 +4,6 @@
 # À chaque essai, le programme donne un indice à l’utilisateur en lui disant si le nombre 
 # qu’il a entré est plus grand ou plus petit que le nombre mystère. 
 # Le jeu se termine lorsque l’utilisateur devine le nombre mystère ou lorsqu’il a épuisé tous ses essais. 
-# J’espère que cela vous aide à comprendre le code. Si vous avez d’autres questions, n’hésitez pas à demander. 
-
 
 import random  # Importe le module random pour générer des nombres aléatoires
 

@@ -1,3 +1,7 @@
+# En résumé, ce code trie le contenu en fonction de l’âge de l’utilisateur et 
+# affiche uniquement le contenu qui est approprié pour l’âge de l’utilisateur. 
+# Chaque élément de contenu a un niveau d’âge associé, 
+# et seuls les éléments dont le niveau d’âge est inférieur ou égal à l’âge de l’utilisateur sont affichés. 
 
 age = 5 # Définit l'âge de l'utilisateur
 
