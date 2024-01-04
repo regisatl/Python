@@ -16,3 +16,4 @@ En résumé nous avons quatre grandes méthodes de formatage de texte:
 Une séquences
 
 Les données dans un tuples peut être uniquement lu, elles ne peuvent pas être modifiées ni supprimées
+
