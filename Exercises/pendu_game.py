@@ -58,14 +58,18 @@ while loop : # Tant que 'loop' est vrai,
                   for i in range(word_len) : # Parcourt chaque caractère du mot entré par l'
                         
                         if wordUser[i] == word[i] : # Si le caractère correspond au caractère du mot caché,
+                              if i > 0 :
+                                    if word[i-1] == wordUser[i-1] :
+                                          wordMystere += word[i] # ajoute le caractère à 'wordMystere'
+                                    else :
+                                          wordMystere += wordMystereBackup[i] # ajoute le caractère sauvegarder dans wordMystere dans à 'wordMystere' 
+                              else : 
+                                    wordMystere += wordMystereBackup[i] # ajoute le caractère sauvegarder dans wordMystere dans à 'wordMystere'
 
-                              wordMystere += word[i] # ajoute le caractère à 'wordMystere'
                         else :
 
                               wordMystere += wordMystereBackup[i] # Sinon, ajoute le caractère correspondant de 'wordMystereBackup' à 'wordMystere'
                               
-                              wordMystere = "" # réinitialise 'wordMystere'
-
                   print(f"Désolé le entré ne correspond pas !")  # Imprime un message indiquant que le mot entré par l'utilisateur ne correspond pas
             else : 
 
