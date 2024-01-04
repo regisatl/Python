@@ -27,7 +27,10 @@ if 0 <= age <= 5 : # Bébé 0  Si l'utilisateur est un bébé (0-5 ans)
 
       for item in content : # Parcourt chaque élément de la liste de contenu
             if item[2] <= 0 :  # Si le niveau d'âge de l'élément est approprié pour un bébé,
-                  print(f"{item[0]} de {item[1]}") # imprime le titre et l'auteur de l'élément
+                  if not item[1] == "UNKNOW" :
+                        print(f"{item[0]} de {item[1]}") # imprime le titre et l'auteur de l'élément
+                  else : 
+                        print(f"{item[0]}") # imprime uniquement le titre de l'élément
 
 elif 6 <= age <= 12 : # Enfant 1 Si l'utilisateur est un enfant (6-12 ans)
       print("Bienvenue dans l'interface Enfant !")
