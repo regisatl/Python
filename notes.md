@@ -75,11 +75,11 @@ ma_liste.reverse()
 En Python, un tuple est une autre structure de données qui permet de stocker une collection ordonnée d'éléments. Les tuples, comme les listes, sont des objets mutables, ce qui signifie qu'ils peuvent être modifiés après leur création.
 
 Voici quelques-unes des méthodes et actions courantes que vous pouvez effectuer sur les tuples en Python :
-index(): Renvoie le plus petit numéro d'index correspondant à l'élément donné dans le tuple.
-count(): Renvoie le nombre de fois où l'élément donné est présent dans le tuple.
+`index(): `Renvoie le plus petit numéro d'index correspondant à l'élément donné dans le tuple.
+`count(): `Renvoie le nombre de fois où l'élément donné est présent dans le tuple.
 
-- et \*: Les opérateurs de concaténation et de répétition pour les tuples.
-  tuple(): Convertit une liste en tuple.
+`- et \*: `Les opérateurs de concaténation et de répétition pour les tuples.
+  `tuple(): `Convertit une liste en tuple.
   Voici un exemple d'utilisation de ces méthodes et actions :
 
 ```py
@@ -155,3 +155,44 @@ mon_dictionnaire.update(mon_dictionnaire_fusionne)
 
 
 ```
+
+## les sets
+
+Un set en Python est une collection d'éléments non ordonnés, où chaque élément est unique (pas de doublons) et doit être immuable (ne peut pas être modifié) 
+1
+. Voici un aperçu des méthodes et actions courantes que l'on peut effectuer sur les sets en Python :
+
+`Création d'un set`
+`Ajout d'un élément à un set`
+`Suppression d'un élément d'un set`
+`Vérifier si un élément existe dans un set`
+`Itération sur un set`
+
+Voici des exemples d'utilisation de ces méthodes et actions :
+```py
+# Créer un set
+mon_set = {"A", "B", "C"}
+
+# Ajouter un élément à un set
+mon_set.add("D")
+
+# Supprimer un élément d'un set
+mon_set.remove("B")
+
+# Vérifier si un élément existe dans un set
+if "A" in mon_set:
+    print("A est présent dans le set")
+
+# Itérer sur un set
+for élément in mon_set:
+    print(élément)
+
+```
+Les sets en Python permettent également d'effectuer des opérations mathématiques sur les ensembles, telles que l'union (|), l'intersection (&) et la différence symétrique (^) 
+2
+. Chacune de ces opérations a une méthode correspondante pour effectuer l'opération sur un set :
+`Union : `mon_set1 | mon_set2
+`Intersection :` mon_set1 & mon_set2
+`Difference symétrique :` mon_set1 ^ mon_set2
+Enfin, vous pouvez convertir un set en une liste ou un tuple pour effectuer des opérations qui ne sont pas définies sur les sets, puis convertir à nouveau le set si nécessaire
+5
