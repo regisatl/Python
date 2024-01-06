@@ -1,15 +1,18 @@
-mySet = {1, 2, 3, 4, 2, 9, 4, 'a', 'b', 'c'}
+lessonSet = {'html', 'php', 'javascript', 'java', 'css', 'python', 'laravel', 'angular', 'flutter', 'vue js', 'sql'}
 
-otherSet = {5, 6, 7, 8, 'c', 'd', 'd'}
+lessonStudent = ('html', 'php', 'javascript', 'java', 'css', 'python', 'typescript')
 
-mySet.remove(9)
+finalElements = lessonSet.union(lessonStudent)
+print('finalElements: ',  finalElements)
 
-print(mySet)
+lessonSet.remove('spring Boot')
 
-unionSet = mySet.union(otherSet)
+print('lessonSet :', lessonSet)
 
-print(unionSet)
+lessonSet.add('sprint boot')
 
-intersectionSet = mySet.intersection(otherSet)
+print('lessonSet :', lessonSet)
 
-print(intersectionSet)
+# Supposons que nous voulons gérer les cours auxquels les étudians sont inscrits. 
+# Utilisez un tuple pour rprésenter les cours d'un étudiant et un set pour représenter l'ensemble des cours disponibles. 
+# Ajoutez, supprimez et effectuez des opéations sur les cours.
