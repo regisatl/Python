@@ -20,6 +20,12 @@ getAllPagesScraping()
 def parseAttorney() :
       request = requests.get("https://www.barreaudenice.com/annuaire/avocats/?fwp_paged=1")
       soup = BeautifulSoup(request.content, "html.parser")
-      print(soup)
+
+      attorneys = soup.find_all("div", class_ ="callout secondary annuaire-single")
+      
+      for attorney in attorneys :
+            name = attorney.find('h3').text.strip()
+            print(name)
+      
       
 parseAttorney()
