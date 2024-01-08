@@ -4,17 +4,22 @@ from bs4 import BeautifulSoup
 verifyGetRequest = requests.get("https://www.barreaudenice.com/annuaire/avocats/?fwp_paged=1")
 print(verifyGetRequest.status_code)
 
-def getAllPagesScraping():
+def getAllPagesScraping() :
       
       urls = []
-      
       pageNumber = 1
       
       for i in range (107) : 
             i = f"https://www.barreaudenice.com/annuaire/avocats/?fwp_paged={pageNumber} "
             pageNumber += 1
             urls.append(i)      
-
             return urls
       
 getAllPagesScraping()
+
+def parseAttorney() :
+      request = requests.get("https://www.barreaudenice.com/annuaire/avocats/?fwp_paged=1")
+      soup = BeautifulSoup(request.content, "html.parser")
+      print(soup)
+      
+parseAttorney()
