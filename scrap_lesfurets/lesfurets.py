@@ -1,6 +1,6 @@
-from bs4 import BeautifulSoup
 import requests
+from bs4 import BeautifulSoup
 import re
 
-verifyGetRequest = requests.get("https://www.barreaudenice.com/annuaire/avocats/?fwp_paged=1")
+verifyGetRequest = requests.get("https://www.lesfurets.com/")
 print(verifyGetRequest.status_code)
