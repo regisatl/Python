@@ -19,18 +19,32 @@ def getAllPagesScraping() :
 getAllPagesScraping()
 
 def parseAttorney(url) :
-      request = requests.get("https://www.barreaudenice.com/annuaire/avocats/?fwp_paged=1")
+      
+      request = requests.get(url)
       soup = BeautifulSoup(request.content, "html.parser")
 
       attorneys = soup.find_all("div", class_ ="callout secondary annuaire-single")
       
       for attorney in attorneys :
-            nameAttorney = attorney.find('h3').text.strip()
+            try :
+                  nameAttorney = attorney.find('h3').text.strip()
+            except : 
+                  pass
             adressAttorney = attorney.find('span', class_ = 'adresse').text.strip()
-            adressFinalAttorney = re.sub(r"\s*", " ", adressAttorney)
+            try :    
+                  adressFinalAttorney = re.sub(r"\s*", " ", adressAttorney)
+            except :
+                  pass
             telAttorney = attorney.find('span', class_ = 'telephone').text.strip()
-            emailAttorney = attorney.find('span', class_ = 'email').a.text.strip()
-            
+            try:
+                telFinalAttorney = re.sub(r"\s*", " ", telAttorney)
+            except :
+                pass 
+            try:
+                  emailAttorney = attorney.find('span', class_ = 'email').a.text.strip()
+            except:
+                    pass
+      
             wayStockData = r"C:\Users\Régis.Attolou\Documents\Github\Python\scrap_annuaire\annuaire_attorney.txt"
             with open(wayStockData, "a") as f :
                   f.write(f" {nameAttorney}\n")
@@ -40,6 +54,7 @@ def parseAttorney(url) :
             
 
 def parseAllAttorneys() :
+      
       pages = getAllPagesScraping()
       for page in pages :
             parseAttorney(url = page)
