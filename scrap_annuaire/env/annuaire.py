@@ -13,8 +13,8 @@ def getAllPagesScraping():
       for i in range (107): 
             i = f"https://www.barreaudenice.com/annuaire/avocats/?fwp_paged={pageNumber}"
             pageNumber += 1
-            urls.append(i)      
-            return urls
+            urls.append(i)  
+      return urls
 
 def parseAttorney(url):
       
@@ -24,24 +24,43 @@ def parseAttorney(url):
       attorneys = soup.find_all("div", class_ ="callout secondary annuaire-single")
       
       for attorney in attorneys:
-            try :
-                  nameAttorney = attorney.find('h3').text.strip()
-            except : 
-                  pass
-            adressAttorney = attorney.find('span', class_ = 'adresse').text.strip()
-            try :    
-                  adressFinalAttorney = re.sub(r"\s*", " ", adressAttorney)
-            except :
-                  pass
-            telAttorney = attorney.find('span', class_ = 'telephone').text.strip()
+            # try :
+            #       nameAttorney = attorney.find('h3').text.strip()
+            # except : 
+            #       pass
+            # adressAttorney = attorney.find('span', class_ = 'adresse').text.strip()
+            # try :    
+            #       adressFinalAttorney = re.sub(r"\s*", " ", adressAttorney)
+            # except :
+            #       pass
+            # telAttorney = attorney.find('span', class_ = 'telephone').text.strip()
+            # try:
+            #     telFinalAttorney = re.sub(r"\s*", " ", telAttorney)
+            # except :
+            #     pass 
+            # try:
+            #       emailAttorney = attorney.find('span', class_ = 'email').a.text.strip()
+            # except:
+            #         pass
             try:
-                telFinalAttorney = re.sub(r"\s*", " ", telAttorney)
-            except :
-                pass 
+                  nameAttorney = attorney.find('h3').text.strip()
+            except AttributeError:
+                  nameAttorney = "N/A"
+            try:
+                  adressAttorney = attorney.find('span', class_ = 'adresse').text.strip()
+                  adressFinalAttorney = re.sub(r"\s*", " ", adressAttorney)
+            except AttributeError:
+                  adressFinalAttorney = "N/A"
+            try:
+                  telAttorney = attorney.find('span', class_ = 'telephone').text.strip()
+                  telFinalAttorney = re.sub(r"\s*", " ", telAttorney)
+            except AttributeError:
+                  telFinalAttorney = "N/A"
             try:
                   emailAttorney = attorney.find('span', class_ = 'email').a.text.strip()
-            except:
-                    pass
+            except AttributeError:
+                  emailAttorney = "N/A"
+
       
             wayStockData = r"C:\Users\Régis.Attolou\Documents\Github\Python\scrap_annuaire\annuaire_attorney.txt"
             with open(wayStockData, "a") as f :
