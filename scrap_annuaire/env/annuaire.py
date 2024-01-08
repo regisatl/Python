@@ -24,24 +24,6 @@ def parseAttorney(url):
       attorneys = soup.find_all("div", class_ ="callout secondary annuaire-single")
       
       for attorney in attorneys:
-            # try :
-            #       nameAttorney = attorney.find('h3').text.strip()
-            # except : 
-            #       pass
-            # adressAttorney = attorney.find('span', class_ = 'adresse').text.strip()
-            # try :    
-            #       adressFinalAttorney = re.sub(r"\s*", " ", adressAttorney)
-            # except :
-            #       pass
-            # telAttorney = attorney.find('span', class_ = 'telephone').text.strip()
-            # try:
-            #     telFinalAttorney = re.sub(r"\s*", " ", telAttorney)
-            # except :
-            #     pass 
-            # try:
-            #       emailAttorney = attorney.find('span', class_ = 'email').a.text.strip()
-            # except:
-            #         pass
             try:
                   nameAttorney = attorney.find('h3').text.strip()
             except AttributeError:
