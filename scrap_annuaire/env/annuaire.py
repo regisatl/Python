@@ -25,7 +25,7 @@ def parseAttorney() :
       
       for attorney in attorneys :
             name = attorney.find('h3').text.strip()
-            print(name)
-      
+            adressAttorney = attorney.find('span', class_ = 'adresse').text.strip()
+            print(adressAttorney)
       
 parseAttorney()
