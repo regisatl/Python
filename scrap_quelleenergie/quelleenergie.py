@@ -3,13 +3,14 @@ from bs4 import BeautifulSoup
 import re
 
 urls = []
+
 def extractUrlsData():
       request = requests.get("https://www.quelleenergie.fr/")
       soup = BeautifulSoup(request.content, "html.parser")
       
-      test = soup.find_all("a")
+      dataText = soup.find_all("a")
       
-      for i in test:
+      for i in dataText:
             base_url = "https://www.quelleenergie.fr"
             link_suffixe = i["href"]
             final_url = ""
@@ -17,7 +18,8 @@ def extractUrlsData():
                   final_url = link_suffixe
             elif link_suffixe.startswith("/"):
                   final_url = base_url + link_suffixe
-                  urls.append(final_url)
+                  if not final_url in urls:
+                        urls.append(final_url)
       return urls
 
 def getAllPagesScraping(link):
