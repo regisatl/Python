@@ -10,26 +10,19 @@ def extractUrlsData():
       
       dataText = soup.find_all("a", href=True)
       
-      # Afficher les liens href
+      # Afficher les liens href             
       for link in dataText:
-             print(link['href'])
-      
-      # for i in dataText:
-      #       base_url = "https://www.legalplace.fr/"
-      #       if i['href'] == " ":
-      #            pass
-      #       else:
-      #             link_suffixe = i['href']
-      #       final_url = ""
-      #       if link_suffixe.startswith("https://"):
-      #             final_url = link_suffixe
-      #       elif link_suffixe.startswith("/"):
-      #             final_url = base_url + link_suffixe
-      #             if not final_url in urls:
-      #                   urls.append(final_url)
-
-      # for url in urls:
-      #       print(url)
+            baseUrl ="https://www.legalplace.fr"
+            urlsInit = []
+            urlsInit.append(link['href'])
+            for url in urlsInit:
+                  if url.startswith("https://"):
+                       print(url)
+                  elif url.startswith("/"):
+                        urLink = f"{baseUrl}" + url
+                        print(urLink)
+                  elif url.startswith("#"):
+                        pass
 
 extractUrlsData()
 
