@@ -252,3 +252,60 @@ print(resultat.group(1))
 print(resultat.group(2))
 
 ```
+## Listes des commandes dans un projet python
+
+Voici une liste de commandes Python utiles pour un projet Python :
+
+1. Exécuter un fichier Python : `python <nom_du_fichier.py>`
+2. Exécuter du code Python sans ouvrir un fichier : `python -c "print('Hello, World!')"`
+3. Exécuter un module Python en tant que script : `python -m <module_name>`
+4. Installer un paquet Python avec pip : `pip install <package>`
+5. Lister les paquets Python installés : `pip list` ou `pip freeze`
+6. Importer un paquet Python dans un script : `import <package>`
+7. Vérifier la version de Python que vous exécutez : `python -V`
+8. Utiliser l'interpréteur Python dans un terminal : `python -i`
+9. Exécuter des commandes Python depuis l'entrée standard : `python -c "print('Hello, World!')"`
+10. Exécuter du code Python contenu dans un fichier .py : `python <nom_du_fichier.py>`
+11. Exécuter du code Python contenu dans un script .pyo : `python <nom_du_fichier.pyo>`
+12. Exécuter du code Python contenu dans un script .pyc : `python <nom_du_fichier.pyc>`
+13. Exécuter du code Python contenu dans un script .pycu : `python <nom_du_fichier.pycu>`
+14. Exécuter du code Python contenu dans un script .pyd : `python <nom_du_fichier.pyd>`
+15. Exécuter du code Python contenu dans un script .pyz : `python <nom_du_fichier.pyz>`
+
+N'oubliez pas que vous pouvez utiliser la documentation de Python pour obtenir des informations supplémentaires sur les commandes et les options disponibles[2].
+
+Citations:
+
+[1] https://kinsta.com/fr/blog/commandes-python/
+[2] https://docs.python.org/fr/3/using/cmdline.html
+[3] https://python.developpez.com/exercices/?page=Les-chaines-de-caracteres
+[4] https://www.math.univ-toulouse.fr/~pmaillar/cours/modelisation2020/liste%20de%20commandes%20Python.pdf
+[5] https://openclassrooms.com/fr/courses/6951236-mettez-en-place-votre-environnement-python/7013523-gerez-des-paquets-python
+
+La gestion des dépendances dans un projet Python est essentielle pour assurer la cohérence et la reproductibilité du code. Voici quelques commandes et outils couramment utilisés pour gérer les dépendances dans un projet Python :
+
+1. **pip** : Pip est le gestionnaire de paquets par défaut pour Python. Il est utilisé pour installer et gérer les dépendances d'un projet. Quelques commandes utiles :
+   - `pip install <package>` : Installe un paquet Python.
+   - `pip uninstall <package>` : Désinstalle un paquet Python.
+   - `pip list` : Liste les paquets installés.
+   - `pip freeze` : Génère une liste des paquets installés avec les versions, utile pour la reproductibilité du projet.
+
+2. **Pipenv** : Pipenv est un outil de gestion d'environnements virtuels et de dépendances. Il combine pip et virtualenv dans un seul outil. Quelques commandes utiles :
+   - `pipenv install <package>` : Installe un paquet et le rajoute à Pipfile.
+   - `pipenv uninstall <package>` : Désinstalle un paquet et le retire de Pipfile.
+   - `pipenv lock` : Génère un fichier Pipfile.lock basé sur les dépendances actuelles et leurs versions.
+
+3. **Poetry** : Poetry est un outil de gestion de dépendances et de packaging pour Python. Il permet de déclarer les dépendances d'un projet dans un fichier pyproject.toml.
+
+4. **pip-tools** : L'outil pip-tools est utilisé pour construire des fichiers de dépendances cohérents. Quelques commandes utiles :
+   - `pip-compile` : Génère un fichier requirements.txt basé sur les dépendances déclarées dans un fichier.in.
+   - `pip-sync` : Installe les paquets spécifiés dans un fichier requirements.txt, en supprimant les paquets non spécifiés.
+
+Ces outils et commandes sont largement utilisés dans la communauté Python pour gérer les dépendances des projets. Il est recommandé de choisir l'outil qui convient le mieux à vos besoins et à la structure de votre projet.
+
+Citations:
+[1] https://www.docstring.fr/blog/gerer-efficacement-les-dependances-de-vos-projets/
+[2] https://blog.stephane-robert.info/post/python-pipx-piptools-pipdeptree/
+[3] https://moisio.fr/2022/05/09/python-gestion-des-packages-et-des-dependances/
+[4] https://makina-corpus.com/python/gerer-ses-dependances-de-paquets-python
+[5] https://www.math.univ-toulouse.fr/~pmaillar/cours/modelisation2020/liste%20de%20commandes%20Python.pdf
