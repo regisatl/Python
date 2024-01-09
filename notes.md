@@ -309,3 +309,5 @@ Citations:
 [3] https://moisio.fr/2022/05/09/python-gestion-des-packages-et-des-dependances/
 [4] https://makina-corpus.com/python/gerer-ses-dependances-de-paquets-python
 [5] https://www.math.univ-toulouse.fr/~pmaillar/cours/modelisation2020/liste%20de%20commandes%20Python.pdf
+
+`python.exe -m pip install --upgrade pip`
