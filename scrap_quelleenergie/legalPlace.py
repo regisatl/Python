@@ -13,10 +13,12 @@ def extractUrlsData():
             baseUrl = "https://www.legalplace.fr"
             url = link['href']
             if url.startswith("https://"):
-                  urls.append(url)
+                  if not url in urls:
+                        urls.append(url)
             elif url.startswith("/"):
                   urLink = f"{baseUrl}{url}"
-                  urls.append(urLink)
+                  if not url in urls:
+                        urls.append(urLink)
             elif url.startswith("#"):
                   pass
       return urls
