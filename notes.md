@@ -196,3 +196,59 @@ Les sets en Python permettent également d'effectuer des opérations mathématiq
 `Difference symétrique :` mon_set1 ^ mon_set2
 Enfin, vous pouvez convertir un set en une liste ou un tuple pour effectuer des opérations qui ne sont pas définies sur les sets, puis convertir à nouveau le set si nécessaire
 5
+
+## Les expressions régulières
+
+Les expressions régulières (ou RegEx) sont des séquences de caractères qui définissent un motif de recherche. En Python, les expressions régulières sont implémentées dans le module re. Voici quelques méthodes et actions courantes que l'on peut effectuer avec les expressions régulières en Python :
+
+`Recherche de motifs : `On peut rechercher des motifs dans une chaîne de caractères en utilisant la méthode search() ou match().
+`Recherche de toutes les occurrences :` On peut rechercher toutes les occurrences d'un motif dans une chaîne de caractères en utilisant la méthode findall().
+`Remplacement de motifs `: On peut remplacer des motifs dans une chaîne de caractères en utilisant la méthode sub().
+`Utilisation de caractères spéciaux :` Les expressions régulières en Python utilisent des caractères spéciaux pour définir des motifs, tels que . pour n'importe quel caractère, * pour zéro ou plusieurs occurrences, + pour une ou plusieurs occurrences, ? pour zéro ou une occurrence, ^ pour le début de la chaîne, $ pour la fin de la chaîne, etc.
+`Utilisation de classes de caractères :` Les classes de caractères permettent de définir un ensemble de caractères possibles pour un motif, tels que [a-z] pour toutes les lettres minuscules, [1][2][3][4][5] pour tous les chiffres, etc.
+`Utilisation de groupes de capture :` Les groupes de capture permettent de capturer des parties spécifiques d'un motif en utilisant des parenthèses.
+
+Voici quelques exemples d'utilisation de ces méthodes et actions :
+
+```py
+import re
+
+# Recherche de motifs
+texte = "Bonjour tout le monde"
+motif = "tout"
+resultat = re.search(motif, texte)
+print(resultat.group())
+
+# Recherche de toutes les occurrences
+texte = "Bonjour tout le monde"
+motif = "o"
+resultat = re.findall(motif, texte)
+print(resultat)
+
+# Remplacement de motifs
+texte = "Bonjour tout le monde"
+motif = "tout"
+remplacement = "rien"
+resultat = re.sub(motif, remplacement, texte)
+print(resultat)
+
+# Utilisation de caractères spéciaux
+texte = "Bonjour tout le monde"
+motif = "^Bonjour"
+resultat = re.search(motif, texte)
+print(resultat.group())
+
+# Utilisation de classes de caractères
+texte = "Bonjour tout le monde"
+motif = "[a-z]+"
+resultat = re.findall(motif, texte)
+print(resultat)
+
+# Utilisation de groupes de capture
+texte = "Bonjour tout le monde"
+motif = "(Bonjour) (tout)"
+resultat = re.search(motif, texte)
+print(resultat.group(1))
+print(resultat.group(2))
+
+```
