@@ -7,23 +7,22 @@ def extract_links(url):
     Cette fonction extrait tous les liens d'une URL donnée.
     """
     response = requests.get(url)
-    response.encoding = 'utf-8'  # Ajoutez cette ligne
     soup = BeautifulSoup(response.text, 'html.parser')
     links = [link.get('href') for link in soup.find_all('a')]
     return links
 
 def validate_link(url, base_url):
-    if url is None:
-        return False
-    elif url.startswith('http://') or url.startswith('https://'):
-        return url
-    elif url.startswith('www'):
-        return 'https://' + url
-    elif url.startswith(r"/[a-zA-Z0-9]+"):
-        return base_url.rstrip('/') + url  # Enlevez le slash final de l'URL de base avant de l'ajouter
-    else:
-        return None
 
+      if url is None:
+            return False
+      elif url.startswith('http://') or url.startswith('https://'):
+            return url
+      elif url.startswith('www'):
+            return True
+      elif url.startswith(r"/[a-zA-Z0-9]+"):
+            return base_url + url
+      else:
+            return None
 
 def remove_special_chars(text):
     """
@@ -40,10 +39,11 @@ def extract_data(url):
     response.encoding = 'utf-8'  # Ajoutez cette ligne
     soup = BeautifulSoup(response.text, 'html.parser')
     data = {}
-    data['title'] = soup.title.string.strip().replace('\n\n', '\n') if soup.title else None
-    data['h1'] = ' '.join([h1.text.replace('\n\n', '\n') for h1 in soup.find_all('h1')])
-    data['p'] = ' '.join([p.text.replace('\n\n', '\n') for p in soup.find_all('p')])
-    data['div'] = ' '.join([div.text.replace('\n\n', '\n') for div in soup.find_all('div')])
+    
+    data['title'] = remove_special_chars(soup.title.string.encode('utf-8').decode('utf-8')) if soup.title else None
+    data['h1'] = ' '.join([remove_special_chars(h1.text.encode('utf-8').decode('utf-8')) for h1 in soup.find_all('h1')]) if soup.find_all('h1') else None
+    data['p'] = ' '.join([remove_special_chars(p.text.encode('utf-8').decode('utf-8')) for p in soup.find_all('p')]) if soup.find_all('p') else None
+    data['div'] = ' '.join([remove_special_chars(div.text.encode('utf-8').decode('utf-8')) for div in soup.find_all('div')]) if soup.find_all('div') else None
 
     return data
 
@@ -55,24 +55,31 @@ def scrape_site(url):
     links = extract_links(url)
     base_url = url
     valid_links = [link for link in links if validate_link(link, base_url) and link is not None]
-    wayStockData = r"C:\Users\Régis.Attolou\Documents\Github\Python\scrap_quelleenergie/doofinder.txt"
     
-    with open(wayStockData, 'a', encoding="utf-8") as f:
+    with open('garantme.txt', 'w', encoding="utf-8") as f:
         for link in valid_links:
             try:
-                data = extract_data(link)
-                f.write(f"On scrape l'URL: {link}\n\n")
-                if data['title']:
-                    f.write(f"Title: {data['title']}\n\n")
-                if data['h1']:
-                    f.write(f"H1: {data['h1']}\n\n")
-                if data['p']:
-                    f.write(f"P: {data['p']}\n\n")
-                if data['div']:
-                    f.write(f"Div: {data['div']}\n\n")
-                f.write("\n\n")
-                print("Scraping réussi") # Ajout d'un message de réussite
-            except Exception as e:
-                print(f"Scrapping échoué: {e}") # Ajout d'un message d'échec
+                 data = extract_data(link)
+                 f.write(f"On scrape l'URL: {link}\n\n")
+                 try:
+                      f.write(f"Title: {data['title'].strip()}\n\n")
+                 except AttributeError:
+                      return None
+                 try:
+                      f.write(f"H1: {data['h1'].strip()}\n\n")
+                 except AttributeError:
+                      return None
+                 try:
+                      f.write(f"P: {data['p'].strip()}\n\n")
+                 except AttributeError:
+                      return None
+                 try:
+                      f.write(f"Div: {data['div'].strip()}\n\n")
+                 except AttributeError:
+                      return None
+                 f.write("\n\n")
+                 print("Scraping réussi") # Ajout d'un message de réussite
+            except AttributeError:
+                print("Scrapping échoué") # Ajout d'un message d'échec
 
-scrape_site('https://www.doofinder.com/fr')
+scrape_site('https://blog.garantme.fr/fr')
