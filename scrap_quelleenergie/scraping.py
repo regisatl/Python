@@ -77,7 +77,7 @@ def scrape_site(url):
                       return None
                  f.write("\n\n")
                  print("Scraping réussi") # Ajout d'un message de réussite
-            except:
-                continue
+            except AttributeError:
+                print("Scrapping échoué") # Ajout d'un message d'échec
 
 scrape_site('https://www.latribune.fr/')
