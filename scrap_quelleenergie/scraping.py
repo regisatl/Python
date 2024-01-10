@@ -52,7 +52,7 @@ def scrape_site(url):
     links = extract_links(url)
     base_url = url
     valid_links = [link for link in links if validate_link(link, base_url) and link is not None]
-    wayStockData = r"C:\Users\Régis.Attolou\Documents\Github\Python\scrap_quelleenergie/wizishop.txt"
+    wayStockData = r"C:\Users\Régis.Attolou\Documents\Github\Python\scrap_quelleenergie/latribune.txt"
     
     with open(wayStockData, 'w', encoding="utf-8") as f:
         for link in valid_links:
@@ -76,7 +76,8 @@ def scrape_site(url):
                  except AttributeError:
                       return None
                  f.write("\n\n")
+                 print("Scraping réussi") # Ajout d'un message de réussite
             except:
                 continue
 
-scrape_site('https://www.wizishop.fr/')
+scrape_site('https://www.latribune.fr/')
