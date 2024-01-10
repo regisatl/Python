@@ -52,7 +52,7 @@ def scrape_site(url):
     links = extract_links(url)
     base_url = url
     valid_links = [link for link in links if validate_link(link, base_url) and link is not None]
-    wayStockData = r"C:\Users\Régis.Attolou\Documents\Github\Python\scrap_quelleenergie/gea-assurances.txt"
+    wayStockData = r"C:\Users\Régis.Attolou\Documents\Github\Python\scrap_quelleenergie/blog-garantme.txt"
     
     with open(wayStockData, 'w', encoding="utf-8") as f:
         for link in valid_links:
@@ -80,4 +80,4 @@ def scrape_site(url):
             except AttributeError:
                 print("Scrapping échoué") # Ajout d'un message d'échec
 
-scrape_site('https://gea-assurances.com')
+scrape_site('https://blog.garantme.fr/fr')
