@@ -52,7 +52,7 @@ def scrape_site(url):
     links = extract_links(url)
     base_url = url
     valid_links = [link for link in links if validate_link(link, base_url) and link is not None]
-    wayStockData = r"C:\Users\Régis.Attolou\Documents\Github\Python\scrap_quelleenergie/blog-weproc.txt"
+    wayStockData = r"C:\Users\Régis.Attolou\Documents\Github\Python\scrap_quelleenergie/luko.txt"
     
     with open(wayStockData, 'w', encoding="utf-8") as f:
         for link in valid_links:
@@ -60,19 +60,19 @@ def scrape_site(url):
                  data = extract_data(link)
                  f.write(f"On scrape l'URL: {link}\n\n")
                  try:
-                      f.write(f"Title: {data['title'].splitlines()}\n\n")
+                      f.write(f"Title: {data['title'].strip()}\n\n")
                  except AttributeError:
                       return None
                  try:
-                      f.write(f"H1: {data['h1'].splitlines()}\n\n")
+                      f.write(f"H1: {data['h1'].strip()}\n\n")
                  except AttributeError:
                       return None
                  try:
-                      f.write(f"P: {data['p'].splitlines()}\n\n")
+                      f.write(f"P: {data['p'].strip()}\n\n")
                  except AttributeError:
                       return None
                  try:
-                      f.write(f"Div: {data['div'].splitlines()}\n\n")
+                      f.write(f"Div: {data['div'].strip()}\n\n")
                  except AttributeError:
                       return None
                  f.write("\n\n")
@@ -80,4 +80,4 @@ def scrape_site(url):
             except AttributeError:
                 print("Scrapping échoué") # Ajout d'un message d'échec
 
-scrape_site('https://blog.weproc.com')
+scrape_site('https://fr.luko.eu')
