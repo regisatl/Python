@@ -5,13 +5,13 @@ import re
 urls = []
 
 def extractUrlsData():
-      requete = requests.get("https://fr.luko.eu/")
+      requete = requests.get("https://www.wizishop.fr/")
       soup = BeautifulSoup(requete.content, "html.parser")
       
       dataLink = soup.find_all("a", href=True)
       
       for link in dataLink:
-            baseUrl = "https://fr.luko.eu/"
+            baseUrl = "https://www.wizishop.fr"
             linkSuffixe = link['href']
             tempUrl = ""
             if linkSuffixe.startswith("https://"):
