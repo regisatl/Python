@@ -56,7 +56,7 @@ def scrape_site(url):
     base_url = url
     valid_links = [link for link in links if validate_link(link, base_url) and link is not None]
     
-    with open('blog-weproc.txt', 'w', encoding="utf-8") as f:
+    with open('expat-assurance.txt', 'w', encoding="utf-8") as f:
         for link in valid_links:
             try:
                  data = extract_data(link)
@@ -82,4 +82,4 @@ def scrape_site(url):
             except AttributeError:
                 print("Scrapping échoué") # Ajout d'un message d'échec
 
-scrape_site('https://blog.weproc.com/')
+scrape_site('https://expat-assurance.com/fr')
