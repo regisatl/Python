@@ -28,7 +28,7 @@ def remove_special_chars(text):
     """
     Cette fonction supprime les caractères spéciaux inutiles d'une chaîne de caractères.
     """
-    text = re.sub(r'\s*', ' ', text) # Remove duplicate spaces
+    text = re.sub(r'\s+', ' ', text) # Remove duplicate spaces
     return text.strip()
 
 def extract_data(url):
@@ -56,7 +56,7 @@ def scrape_site(url):
     base_url = url
     valid_links = [link for link in links if validate_link(link, base_url) and link is not None]
     
-    with open('expat-assurance.txt', 'w', encoding="utf-8") as f:
+    with open('agriculture-gouv.txt', 'w', encoding="utf-8") as f:
         for link in valid_links:
             try:
                  data = extract_data(link)
@@ -82,4 +82,4 @@ def scrape_site(url):
             except AttributeError:
                 print("Scrapping échoué") # Ajout d'un message d'échec
 
-scrape_site('https://expat-assurance.com/fr')
+scrape_site('https://agriculture.gouv.fr')
