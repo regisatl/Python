@@ -1,4 +1,0 @@
-On scrape l'URL: https://app.assurup.com/login
-
-Title: A s s u r u p  |  A s s u r a n c e  P r o f e s s i o n n e l l e  e t  S t a r t u p  |  S o u s c r i p t i o n
-
