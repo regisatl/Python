@@ -1,30 +1,50 @@
 import requests
 from bs4 import BeautifulSoup
-import urllib.parse
+import re
 
-def scrape_links(url, output_file):
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    links = soup.find_all('a', href=True)
+urls = []
 
-    with open(output_file, 'w', encoding='utf-8') as file:
-        for link in links:
-            href = link.get('href')
-            if href:
-                # Nettoyage des liens
-                href = href.strip()
-                if href.startswith('http://') or href.startswith('https://'):
-                    pass
-                elif href.startswith('www'):
-                    href = 'https://' + href
-                elif href.startswith('/') and href.count('/') == 1:
-                    href = urllib.parse.urljoin(url, href)
-                    href = href.replace(url + '/', '')
+def extractUrlsData():
+      request = requests.get("https://www.01net.com/")
+      soup = BeautifulSoup(request.content, "html.parser")
+      
+      dataText = soup.find_all("a", href=True)
+      
+      for tempLink in dataText:
+            baseUrl = "https://www.01net.com/"
+            url = tempLink['href']
+            if url.startswith("https://") or url.startswith("http://"):
+                  if not url in urls:
+                        urls.append(url)
+            elif url.startswith(r"/[w]+"):
+                  urLink = f"{baseUrl}{url.replace(url + '/', '')}"
+                  if not url in urls:
+                        urls.append(urLink)
+            elif url.startswith('www'):
+                urLink = 'https://' + url
+                if not url in urls:
+                        urls.append(urLink)
+            elif url.startswith("#"):
+                  pass
+      return urls  
 
-                # Ecriture dans le fichier
-                file.write(f'{href} {link.text}\n')
+extractData = extractUrlsData()
 
-if __name__ == '__main__':
-    url = 'https://www.01net.com/'
-    output_file = '01net.txt'
-    scrape_links(url, output_file)
+def getAllPagesScraping(link):
+      requete = requests.get(link)
+      soup = BeautifulSoup(requete.content, "html.parser")
+      text = soup.get_text()
+      finalText = re.sub(r"\s+", " ", text)
+
+      with open('01net.txt', "a", encoding="utf-8") as f :
+            f.write(f"Lien: {link}\n") 
+            f.write(f"Text sur la page: {finalText}\n\n")
+
+
+def getAllDataPages() :
+      pages = extractData
+      for page in pages:
+            getAllPagesScraping(link=page)
+            print(f"On scrappe : {page} ")             
+getAllDataPages()
+
