@@ -5,13 +5,13 @@ import re
 urls = []
 
 def extractUrlsData():
-      request = requests.get("https://www.freenews.fr/")
+      request = requests.get("https://www.universfreebox.com/")
       soup = BeautifulSoup(request.content, "html.parser")
       
       dataText = soup.find_all("a", href=True)
       
       for tempLink in dataText:
-            baseUrl = "https://www.freenews.fr/"
+            baseUrl = "https://www.universfreebox.com/"
             url = tempLink['href']
             if url.startswith("https://") or url.startswith("http://"):
                   if not url in urls:
@@ -37,7 +37,7 @@ def getAllPagesScraping(link):
       text = soup.get_text()
       finalText = re.sub(r"\s+", " ", text)
 
-      with open('freenews.txt', "a", encoding="utf-8") as f :
+      with open('universfreebox.txt', "a", encoding="utf-8") as f :
             f.write(f"Lien: {link}\n") 
             f.write(f"Text sur la page: {finalText}\n\n")
 
