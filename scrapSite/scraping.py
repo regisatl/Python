@@ -2,50 +2,58 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
-urls = []
 
-def extractUrlsData():
-      request = requests.get("https://assistance.free.fr/")
-      soup = BeautifulSoup(request.content, "html.parser")
-      
-      dataText = soup.find_all("a", href=True)
-      
-      for tempLink in dataText:
-            baseUrl = "https://assistance.free.fr/"
-            url = tempLink['href']
-            if url.startswith("https://") or url.startswith("http://"):
-                  if not url in urls:
-                        urls.append(url)
-            elif url.startswith(r"/[w]+"):
-                  urLink = f"{baseUrl.lstrip('/')}{url}"
-                  if not url in urls:
-                        urls.append(urLink)
-            elif url.startswith('www'):
-                urLink = 'https://' + url
-                if not url in urls:
-                        urls.append(urLink)
-            elif url.startswith("#"):
-                  pass
-      return urls  
-
-extractData = extractUrlsData()
-
-def getAllPagesScraping(link):
-      requete = requests.get(link)
-      soup = BeautifulSoup(requete.content, features="xml")
-
-      texte = soup.get_text()
-      finalText = re.sub(r"\s+", " ", texte)
-
-      with open('assistancefree.txt', "a", encoding="utf-8") as f :
-            f.write(f"Lien: {link}\n") 
-            f.write(f"Text sur la page: {finalText}\n\n")
-
-
-def getAllDataPages() :
-      pages = extractData
-      for page in pages:
-            getAllPagesScraping(link=page)
-            print(f"On scrappe : {page} ")             
-getAllDataPages()
-
+class Scraping:
+    def __init__ (self, url):
+        self.url = url
+        
+    def connection(self, url):
+        response = requests.get(url)
+        if response.status_code == 200:
+            return response.content
+        else:
+            print(f"Erreur lors de la requête pour la pagne principal: {response.status_code}")
+            return None
+            
+            
+    def scrape_and_save_content(self):
+        try:
+            main_html_content = self.connection(self.url)
+        
+            if main_html_content:
+                # Analyse du HTML avec Beautifulsoup
+                soup = BeautifulSoup(main_html_content, 'html.parser')
+                
+                # Récupération de tous les liens
+                links = soup.find_all("a")
+                
+                # Ouvrir un seul fichier pour stocker le contenu de toutes les pages
+                with open("echosdunet.txt", 'w', encoding='utf_8') as global_file:
+                    # Parcours de chaque lien
+                    for link in links:
+                        link_url = link.get("href")
+                        
+                        if link_url and link_url.startswith("http"):
+                            link_html_content = self.connection(link_url)
+                            
+                            if link_html_content:
+                                link_soup = BeautifulSoup(link_html_content, 'html.parser')
+                                text_content = link_soup.get_text()
+                                cleaned_text = re.sub(r'\s+', ' ', text_content)
+                                print(cleaned_text)
+                                global_file.write(f"Contenu de {link_url}:\n{cleaned_text}\n\n")
+                            else:
+                                print(f"Impossible de récupérer le contenu de {link_url}")
+            else:
+                print("Erreur lors de la requête pour la page principale")
+        except Exception as e:
+            print(f"Erreur: {e}")
+        
+            
+            
+            
+if __name__ == "__main__":
+    # Instanciation de la classe Scraping
+    scraper = Scraping("https://www.echosdunet.net/")
+    scraper.scrape_and_save_content()
+    print("Le contenue de toutes les pages a été enregistré avec succès")
