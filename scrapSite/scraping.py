@@ -28,7 +28,7 @@ class Scraping:
                 links = soup.find_all("a", href=True)
                 
                 # Ouvrir un seul fichier pour stocker le contenu de toutes les pages
-                with open("allocab.txt", 'w', encoding='utf_8') as global_file:
+                with open("parisaeroport.txt", 'w', encoding='utf_8') as global_file:
                     # Parcours de chaque lien
                     for link in links:
                         link_url = link.get("href")
@@ -54,6 +54,6 @@ class Scraping:
             
 if __name__ == "__main__":
     # Instanciation de la classe Scraping
-    scraper = Scraping("https://www.allocab.com/")
+    scraper = Scraping("https://www.parisaeroport.fr/")
     scraper.scrape_and_save_content()
     print("Le contenue de toutes les pages a été enregistré avec succès")
