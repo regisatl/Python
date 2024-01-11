@@ -28,7 +28,7 @@ class Scraping:
                 links = soup.find_all("a", href=True)
                 
                 # Ouvrir un seul fichier pour stocker le contenu de toutes les pages
-                with open("afonemobile.txt", 'w', encoding='utf_8') as global_file:
+                with open("adp.txt", 'w', encoding='utf_8') as global_file:
                     # Parcours de chaque lien
                     for link in links:
                         link_url = link.get("href")
@@ -41,7 +41,7 @@ class Scraping:
                                 text_content = link_soup.get_text()
                                 cleaned_text = re.sub(r'\s+', ' ', text_content)
                                 print(f"On scrappe : {link_url} ")
-                                global_file.write(f"Contenu de {link_url}:\n text: {cleaned_text}\n\n")
+                                global_file.write(f"Contenu de {link_url}:\n text du contenu: {cleaned_text}\n\n")
                             else:
                                 print(f"Impossible de récupérer le contenu de {link_url}")
             else:
@@ -54,6 +54,6 @@ class Scraping:
             
 if __name__ == "__main__":
     # Instanciation de la classe Scraping
-    scraper = Scraping("https://afonemobile.fr/")
+    scraper = Scraping("https://www.fr.adp.com/")
     scraper.scrape_and_save_content()
     print("Le contenue de toutes les pages a été enregistré avec succès")
