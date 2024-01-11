@@ -17,7 +17,7 @@ def extractUrlsData():
                   if not url in urls:
                         urls.append(url)
             elif url.startswith(r"/[w]+"):
-                  urLink = f"{baseUrl}{url.replace(url + '/', '')}"
+                  urLink = f"{baseUrl.lstrip('/')}{url}"
                   if not url in urls:
                         urls.append(urLink)
             elif url.startswith('www'):
