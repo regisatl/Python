@@ -5,13 +5,13 @@ import re
 urls = []
 
 def extractUrlsData():
-      request = requests.get("https://www.degrouptest.com/")
+      request = requests.get("https://www.tsfi.org/fr")
       soup = BeautifulSoup(request.content, "html.parser")
       
       dataText = soup.find_all("a", href=True)
       
       for tempLink in dataText:
-            baseUrl = "https://www.degrouptest.com/"
+            baseUrl = "https://www.tsfi.org/fr"
             url = tempLink['href']
             if url.startswith("https://") or url.startswith("http://"):
                   if not url in urls:
@@ -34,10 +34,10 @@ def getAllPagesScraping(link):
       requete = requests.get(link)
       soup = BeautifulSoup(requete.content, features="xml")
 
-      text = soup.get_text()
-      finalText = re.sub(r"\s+", " ", text)
+      texte = soup.get_text()
+      finalText = re.sub(r"\s+", " ", texte)
 
-      with open('degrouptest.txt', "a", encoding="utf-8") as f :
+      with open('tsfi.txt', "a", encoding="utf-8") as f :
             f.write(f"Lien: {link}\n") 
             f.write(f"Text sur la page: {finalText}\n\n")
 
