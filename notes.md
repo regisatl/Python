@@ -457,6 +457,57 @@ Dans cet exemple, la méthode manger de l'objet `mon_animal` est appelée pour a
 
 En conclusion, les classes et les objets en Python sont des éléments essentiels pour la programmation orientée objet. Les classes sont des modèles ou des blueprints pour la création d'objets, tandis que les objets sont des instances de classes qui représentent des entités spécifiques dans un programme.
 
+7. Héritage
+    L'héritage est un concept important en programmation orientée objet, qui permet à une classe d'hériter des attributs et méthodes d'une autre classe. En Python, l'héritage est réalisé en utilisant le signe deux points : pour indiquer que la classe qui suit hérite des attributs et méthodes de la classe précédente. 
+    Voici un exemple d'héritage:
+    ```py
+    class Animal:
+    def __init__(self, nom, age):
+        self.nom = nom
+        self.age = age
+
+    def manger(self):
+        print(f"{self.nom} mange.")
+
+    class MonAnimal(Animal):
+    pass
+```
+Dans cet exemple, la classe `MonAnimal` hérite des attributs et méthodes de la classe Animal.
+
+Response: 
+8. Polymorphisme
+    Le polymorphisme est un autre concept important en programmation orientée objet, qui permet à une classe de prendre plusieurs formes. En Python, le polymorphisme est souvent utilisé avec l'héritage. 
+Voici un exemple de polymorphisme:
+
+```py
+    class Animal:
+        def __init__(self, nom, age):
+            self.nom = nom
+            self.age = age
+
+        def manger(self):
+            print(f"{self.nom} mange.")
+
+    class Chien(Animal):
+        def aboyer(self):
+            print(f"{self.nom} aboie.")
+
+    class Chat(Animal):
+        def miauler(self):
+            print(f"{self.nom} miaule.")
+
+    def animal_manger(animal):
+        animal.manger()
+
+    mon_animal = Chien("Fido", 3)
+    animal_manger(mon_animal)
+    mon_animal.aboyer() 
+```
+
+Dans cet exemple, la fonction animal_manger peut être utilisée avec des objets de la classe Chien ou Chat, car elles héritent de la classe Animal.
+
+En conclusion, la pratique de l'héritage et du polymorphisme en Python permet de créer des programmes plus flexibles et réutilisables. L'héritage permet à une classe d'hériter des attributs et méthodes d'une autre classe, tandis que le polymorphisme permet à une classe de prendre plusieurs formes.
+
 
 
 
