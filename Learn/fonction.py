@@ -1,12 +1,18 @@
-def year():
-      print('Nous somme en 2024')
-
-year()
-
-years = 2024
-def next_year():
-      global years
-      years += 1
-      print(f'Nous sommes maintenant en {years} ')
-
-next_year()
+def counter_vowels (word):
+      
+      voyelles = 'aeiouyAEIOUY'
+      counter = 0
+      
+      for letter in word: 
+            if letter in voyelles:
+                  counter += 1
+                  print(f'Nombre de voyelles contenue dans ce mot est: {counter}')
+                  
+def main():
+    word = input("Entrez votre mot : ")
+    count = counter_vowels(word)
+    print(f"Le nombre de voyelles dans le mot est: {count}")
+                  
+if __name__ == "__main__":
+      main()  
+      
