@@ -7,6 +7,7 @@ def calculer_moyenne(nombres):
       for nombre in nombres:
             somme += nombre
       return somme / len(nombres)
+      
 
 rayon = int(input("Veuillez entrer le rayon de votre cône s'il vous plaît : "))
 hauteur = int(input("Veuillez entrer la hauteur de votre cône s'il vous plaît : "))
@@ -30,5 +31,6 @@ def afficher_pair_impair(nombre_utilisateur):
             
 start = int(input("Veuillez entrer la valeur de départ s'il vous plaît : "))
 end = int(input("Veuillez entrer la valeur de fin s'il vous plaît : "))
+
 def nombre_aleatoire(start, end):
       return random.randint(start, end)
