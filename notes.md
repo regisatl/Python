@@ -397,3 +397,70 @@ greet = lambda name: print(f"Hello, {name}!")
 
 greet("Alice") # "Hello, Alice!"
 ```
+## Les classes 
+
+1. Introduction
+    Dans ce guide, nous aborderons les bases des classes et des objets en Python. Les classes sont des modèles ou des blueprints pour la création d'objets, tandis que les objets sont des instances de classes qui représentent des entités spécifiques dans un programme.
+
+Response: 
+2. Classes
+    Une classe est un modèle ou un blueprint pour la création d'objets. En Python, une classe est définie à l'aide du mot-clé class, suivi du nom de la classe et de deux points. Voici un exemple de définition de classe:
+    ```py
+        class MonAnimal:
+        pass
+    ```
+Dans cet exemple, la classe MonAnimal est définie sans `attributs` ni `méthodes`.
+
+Response: 
+3. Attributs
+    Les attributs sont des variables associées à une instance de classe. En Python, les attributs peuvent être définis à l'intérieur ou à l'extérieur d'une méthode (comme __init__ pour l'initialisation). Voici un exemple de définition d'attributs:
+    ```py
+    class MonAnimal:
+    def __init__(self, nom, age):
+        self.nom = nom
+        self.age = age
+    ```
+Dans cet exemple, la classe ``MonAnimal`` possède deux attributs: `nom` et `age`.
+
+Response: 
+4. Méthodes
+    Les méthodes sont des fonctions associées à une instance de classe. En Python, les méthodes sont définies à l'intérieur d'une classe. Voici un exemple de définition d'une méthode:
+    ```py
+    class MonAnimal:
+    def __init__(self, nom, age):
+        self.nom = nom
+        self.age = age
+
+    def manger(self):
+        print(f"{self.nom} mange.")
+    ```
+Dans cet exemple, la classe MonAnimal possède une méthode appelée `manger`.
+
+Response: 
+5. Objets
+    Un objet est une instance de classe qui représente une entité spécifique dans un programme. En Python, un objet est créé en appelant une classe avec les arguments nécessaires pour l'initialisation des attributs. Voici un exemple de création d'un objet:
+    ```py
+    mon_animal = MonAnimal("Chat", 5)
+    ```
+
+Dans cet exemple, la variable mon_animal est un objet de la classe `MonAnimal`.
+
+Response: 
+6. Utilisation des objets
+    Les objets peuvent être utilisés pour accéder et manipuler leurs attributs et méthodes. Voici un exemple d'utilisation d'un objet:
+    ```py
+    mon_animal.manger()
+    print(mon_animal.nom)
+    print(mon_animal.age)
+    ```
+Dans cet exemple, la méthode manger de l'objet `mon_animal` est appelée pour afficher un message. Les attributs nom et age de l'objet `mon_animal` sont également accédés et affichés.
+
+En conclusion, les classes et les objets en Python sont des éléments essentiels pour la programmation orientée objet. Les classes sont des modèles ou des blueprints pour la création d'objets, tandis que les objets sont des instances de classes qui représentent des entités spécifiques dans un programme.
+
+
+
+
+
+
+
+
