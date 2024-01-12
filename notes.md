@@ -311,3 +311,89 @@ Citations:
 [5] https://www.math.univ-toulouse.fr/~pmaillar/cours/modelisation2020/liste%20de%20commandes%20Python.pdf
 
 `python.exe -m pip install --upgrade pip`
+
+## Les fonctions en python
+
+1. Définitions de fonction en python
+   Les fonctions en Python sont des blocs de code réutilisables qui peuvent être définis pour effectuer une tâche spécifique. Les fonctions sont définies en utilisant le mot-clé def suivi du nom de la fonction et de la liste des paramètres entre parenthèses. Le bloc de code de la fonction est indenté sous la déclaration de la fonction.
+
+- Exemple:
+```py
+  def greet(name):
+    print(f"Hello, {name}!")
+```
+2. Paramètres et arguments
+    Les paramètres sont des variables déclarées dans la définition de la fonction qui représentent les entrées de la fonction. Les arguments sont les valeurs réelles fournies pour les paramètres lors de l'appel de la fonction.
+
+- Exemple :
+```py
+def greet(name, age):
+    print(f"Hello, {name}! You are {age} years old.")
+
+greet("Alice", 30) # name="Alice", age=30
+```
+3. Fonctions sans paramètres
+    Les fonctions peuvent être définies sans paramètres.
+
+- Exemple :
+```py
+def say_hello():
+    print("Hello!")
+
+say_hello() # "Hello!"
+```
+4. Fonctions avec des paramètres par défaut
+    Les paramètres de fonction peuvent avoir des valeurs par défaut qui seront utilisées si aucune valeur n'est fournie lors de l'appel de la fonction.
+
+- Exemple :
+```py
+def greet(name, age=30):
+    print(f"Hello, {name}! You are {age} years old.")
+
+greet("Alice") # name="Alice", age=30
+greet("Bob", 25) # name="Bob", age=25
+```
+5. Arguments variadiques
+    Les fonctions peuvent accepter un nombre variable d'arguments en utilisant le signe * dans la définition de la fonction.
+
+- Exemple :
+```py
+def print_all(*args):
+    for arg in args:
+        print(arg)
+
+print_all("Hello", "world!") # "Hello", "world!"
+```
+6. Fonctions à renvoi
+    Les fonctions peuvent renvoyer une valeur en utilisant le mot-clé return. Une fois que return est exécuté, la fonction se termine et la valeur renvoyée est utilisée comme résultat de la fonction.
+
+Exemple :
+```py
+def add(a, b):
+    return a + b
+
+result = add(3, 4) # result=7
+```
+
+7. Fonctions en tant qu'objets
+    En Python, les fonctions sont des objets de première classe, ce qui signifie qu'elles peuvent être utilisées comme des variables, affectées à d'autres variables, passées en argument à d'autres fonctions et renvoyées en tant que résultat de fonction.
+
+Exemple :
+```py
+def add(a, b):
+    return a + b
+
+def apply(func, a, b):
+    return func(a, b)
+
+result = apply(add, 3, 4) # result=7
+```
+8. Utilisation de fonctions anonymes (lambda)
+     Python, les fonctions anonymes peuvent être définies en utilisant la syntaxe lambda. Les fonctions lambda sont généralement plus courtes et moins complexes que les fonctions régulières.
+
+Exemple :
+```py
+greet = lambda name: print(f"Hello, {name}!")
+
+greet("Alice") # "Hello, Alice!"
+```
