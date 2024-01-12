@@ -6,12 +6,13 @@ def counter_vowels (word):
       for letter in word: 
             if letter in voyelles:
                   counter += 1
-                  print(f'Nombre de voyelles contenue dans ce mot est: {counter}')
+                  print(f'Les voyelles contenue dans le mot {word} sont: {letter}')
+      return counter
                   
 def main():
     word = input("Entrez votre mot : ")
     count = counter_vowels(word)
-    print(f"Le nombre de voyelles dans le mot est: {count}")
+    print(f"Le nombre de voyelles dans le mot {word} est: {count}")
                   
 if __name__ == "__main__":
       main()  
