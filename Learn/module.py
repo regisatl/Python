@@ -6,5 +6,3 @@ def calculer_moyenne(nombres):
             somme += nombre
       return somme / len(nombres)
       
-moyenne = calculer_moyenne(nombres)
-print(f"La moyenne est : {moyenne} ")
