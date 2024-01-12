@@ -1,5 +1,3 @@
-from module import calculer_moyenne
-from module import nombres
+import module
 
-print(calculer_moyenne(f"La moyenne est : {nombres}"))
-
+print(f"La moyenne est : {module.calculer_moyenne(module.nombres)} ")
