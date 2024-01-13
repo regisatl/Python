@@ -24,8 +24,6 @@ class ContactManager(contact.Contact):
                   if contact.nom == nom and contact.prenom == prenom:
                         return contact
       
-      
-      
-      
+ 
                   
      
