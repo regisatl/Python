@@ -522,3 +522,4 @@ En conclusion, la pratique de l'héritage et du polymorphisme en Python permet d
 - Le bloc except spécifie le code à exécuter si une exception est levée.
 - Le bloc else (optionnel) contient le code à exécuter si aucune exception n'est levée.
 - Le bloc finally (optionnel) contient le code qui s'exécute toujours, que des exceptions soient levées ou non.
+-
