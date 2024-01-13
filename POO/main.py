@@ -19,14 +19,14 @@ if __name__ == "__main__":
                   adresse = input("Veuillez saisir l'adresse: ")
                   email = input("Veuillez saisir l'email: ")
                   contact_manager.ajouter_contact(nom, prenom, telephone, adresse, email)
-                  with open('donnees.csv', 'a', encoding='utf-8') as fichier_csv:
-                        fichier_csv.write(f"{nom},{prenom},{telephone},{adresse},{email}\n")
+                  with open('contacts.csv', 'a', encoding='utf-8') as fichier_csv:
+                        fichier_csv.write(f"{nom}, {prenom},{telephone},{adresse},{email}\n")
             elif choice == "2":
                   contact_manager.afficher_contacts()
             elif choice == "3":
-                  contact_manager.mettre_a_jour_contact()
+                  contact_manager.mettre_a_jour_contact(nom, prenom, telephone, adresse, email)
             elif choice == "4":
-                  contact_manager.supprimer_contact()
+                  contact_manager.supprimer_contact(nom, prenom, telephone, adresse, email)
             elif choice == "5":
                   break
             else:
