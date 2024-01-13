@@ -1,8 +1,10 @@
-from contact  import Contact
-
-class ContactManager(Contact):
+class ContactManager():
       def __init__(self, nom, prenom, telephone, adresse, email):
-            super().__init__(nom, prenom, telephone, adresse, email)
+            self.nom = nom
+            self.prenom = prenom
+            self.telephone = telephone
+            self.adresse = adresse
+            self.email = email
             self.contacts = []
       def ajouter_contact(self, nom, prenom, telephone, adresse, email):
             self.contacts.append(nom, prenom, telephone, adresse, email)

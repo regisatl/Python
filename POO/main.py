@@ -1,8 +1,8 @@
-from contact import Contact
+import csv
 from contact_manager import ContactManager
 
 if __name__ == "__main__":
-      contact_manager = ContactManager(Contact.nom, Contact.prenom, Contact.telephone, Contact.adresse, Contact.email)
+      contact_manager = ContactManager()
 
       while True:
             print("1. Ajouter un nouveau contact")
@@ -19,8 +19,9 @@ if __name__ == "__main__":
                   adresse = input("Veuillez saisir l'adresse: ")
                   email = input("Veuillez saisir l'email: ")
                   contact_manager.ajouter_contact(nom, prenom, telephone, adresse, email)
-                  with open('contacts.csv', 'a', encoding='utf-8') as fichier_csv:
-                        fichier_csv.write(f"{nom}, {prenom},{telephone},{adresse},{email}\n")
+                  with open('contacts.csv', 'a', encoding='utf-8', newline="") as fichier_csv:
+                        writer = csv.writer(fichier_csv)
+                        writer.writerows(f"{nom}, {prenom},{telephone},{adresse},{email}\n")
             elif choice == "2":
                   contact_manager.afficher_contacts()
             elif choice == "3":
