@@ -11,10 +11,14 @@ class ContactManager(contact.Contact):
       def ajouter_contact(self, contact):
             self.contacts.append(contact)
       
-      def affiche_contacts(self):
+      def afficher_contacts(self):
             for contact in self.contacts:
                   print(contact.nom, contact.prenom, contact.telephone, contact.adresse, contact.email)
-                  
+      
+      def mettre_a_jour_contact(self, contact):
+            for contact in self.contacts:
+                  if contact.nom == contact.nom and contact.prenom == contact.prenom:
+                        return contact
       
       def supprimer_contact(self, contact):
             self.contacts.remove(contact)
