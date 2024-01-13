@@ -10,7 +10,7 @@ En résumé nous avons quatre grandes méthodes de formatage de texte:
 
 - le formatage avec la méthode d'addition ou encore appellé concaténation
 - le formtage avec la méthode format avec les variables nommées
-- le formatage avec les méthodes de pourcentage `%s` et` %d` `%`
+- le formatage avec les méthodes de pourcentage `%s` et ` %d` `%`
 - le formatage avec la méthode `f` qui consiste à mettre f au début de la chaîne avec les variables entre accolades
 
 ## Une séquences
@@ -158,7 +158,7 @@ mon_dictionnaire.update(mon_dictionnaire_fusionne)
 
 ## les sets
 
-Un set en Python est une collection d'éléments non ordonnés, où chaque élément est unique (pas de doublons) et doit être immuable (ne peut pas être modifié) 
+Un set en Python est une collection d'éléments non ordonnés, où chaque élément est unique (pas de doublons) et doit être immuable (ne peut pas être modifié)
 1
 . Voici un aperçu des méthodes et actions courantes que l'on peut effectuer sur les sets en Python :
 
@@ -169,6 +169,7 @@ Un set en Python est une collection d'éléments non ordonnés, où chaque élé
 `Itération sur un set`
 
 Voici des exemples d'utilisation de ces méthodes et actions :
+
 ```py
 # Créer un set
 mon_set = {"A", "B", "C"}
@@ -188,7 +189,8 @@ for élément in mon_set:
     print(élément)
 
 ```
-Les sets en Python permettent également d'effectuer des opérations mathématiques sur les ensembles, telles que l'union (|), l'intersection (&) et la différence symétrique (^) 
+
+Les sets en Python permettent également d'effectuer des opérations mathématiques sur les ensembles, telles que l'union (|), l'intersection (&) et la différence symétrique (^)
 2
 . Chacune de ces opérations a une méthode correspondante pour effectuer l'opération sur un set :
 `Union : `mon_set1 | mon_set2
@@ -252,6 +254,7 @@ print(resultat.group(1))
 print(resultat.group(2))
 
 ```
+
 ## Listes des commandes dans un projet python
 
 Voici une liste de commandes Python utiles pour un projet Python :
@@ -285,19 +288,19 @@ Citations:
 La gestion des dépendances dans un projet Python est essentielle pour assurer la cohérence et la reproductibilité du code. Voici quelques commandes et outils couramment utilisés pour gérer les dépendances dans un projet Python :
 
 1. **pip** : Pip est le gestionnaire de paquets par défaut pour Python. Il est utilisé pour installer et gérer les dépendances d'un projet. Quelques commandes utiles :
+
    - `pip install <package>` : Installe un paquet Python.
    - `pip uninstall <package>` : Désinstalle un paquet Python.
    - `pip list` : Liste les paquets installés.
    - `pip freeze` : Génère une liste des paquets installés avec les versions, utile pour la reproductibilité du projet.
-
 2. **Pipenv** : Pipenv est un outil de gestion d'environnements virtuels et de dépendances. Il combine pip et virtualenv dans un seul outil. Quelques commandes utiles :
+
    - `pipenv install <package>` : Installe un paquet et le rajoute à Pipfile.
    - `pipenv uninstall <package>` : Désinstalle un paquet et le retire de Pipfile.
    - `pipenv lock` : Génère un fichier Pipfile.lock basé sur les dépendances actuelles et leurs versions.
-
 3. **Poetry** : Poetry est un outil de gestion de dépendances et de packaging pour Python. Il permet de déclarer les dépendances d'un projet dans un fichier pyproject.toml.
-
 4. **pip-tools** : L'outil pip-tools est utilisé pour construire des fichiers de dépendances cohérents. Quelques commandes utiles :
+
    - `pip-compile` : Génère un fichier requirements.txt basé sur les dépendances déclarées dans un fichier.in.
    - `pip-sync` : Installe les paquets spécifiés dans un fichier requirements.txt, en supprimant les paquets non spécifiés.
 
@@ -318,34 +321,41 @@ Citations:
    Les fonctions en Python sont des blocs de code réutilisables qui peuvent être définis pour effectuer une tâche spécifique. Les fonctions sont définies en utilisant le mot-clé def suivi du nom de la fonction et de la liste des paramètres entre parenthèses. Le bloc de code de la fonction est indenté sous la déclaration de la fonction.
 
 - Exemple:
+
 ```py
   def greet(name):
     print(f"Hello, {name}!")
 ```
+
 2. Paramètres et arguments
-    Les paramètres sont des variables déclarées dans la définition de la fonction qui représentent les entrées de la fonction. Les arguments sont les valeurs réelles fournies pour les paramètres lors de l'appel de la fonction.
+   Les paramètres sont des variables déclarées dans la définition de la fonction qui représentent les entrées de la fonction. Les arguments sont les valeurs réelles fournies pour les paramètres lors de l'appel de la fonction.
 
 - Exemple :
+
 ```py
 def greet(name, age):
     print(f"Hello, {name}! You are {age} years old.")
 
 greet("Alice", 30) # name="Alice", age=30
 ```
+
 3. Fonctions sans paramètres
-    Les fonctions peuvent être définies sans paramètres.
+   Les fonctions peuvent être définies sans paramètres.
 
 - Exemple :
+
 ```py
 def say_hello():
     print("Hello!")
 
 say_hello() # "Hello!"
 ```
+
 4. Fonctions avec des paramètres par défaut
-    Les paramètres de fonction peuvent avoir des valeurs par défaut qui seront utilisées si aucune valeur n'est fournie lors de l'appel de la fonction.
+   Les paramètres de fonction peuvent avoir des valeurs par défaut qui seront utilisées si aucune valeur n'est fournie lors de l'appel de la fonction.
 
 - Exemple :
+
 ```py
 def greet(name, age=30):
     print(f"Hello, {name}! You are {age} years old.")
@@ -353,10 +363,12 @@ def greet(name, age=30):
 greet("Alice") # name="Alice", age=30
 greet("Bob", 25) # name="Bob", age=25
 ```
+
 5. Arguments variadiques
-    Les fonctions peuvent accepter un nombre variable d'arguments en utilisant le signe * dans la définition de la fonction.
+   Les fonctions peuvent accepter un nombre variable d'arguments en utilisant le signe * dans la définition de la fonction.
 
 - Exemple :
+
 ```py
 def print_all(*args):
     for arg in args:
@@ -364,10 +376,12 @@ def print_all(*args):
 
 print_all("Hello", "world!") # "Hello", "world!"
 ```
+
 6. Fonctions à renvoi
-    Les fonctions peuvent renvoyer une valeur en utilisant le mot-clé return. Une fois que return est exécuté, la fonction se termine et la valeur renvoyée est utilisée comme résultat de la fonction.
+   Les fonctions peuvent renvoyer une valeur en utilisant le mot-clé return. Une fois que return est exécuté, la fonction se termine et la valeur renvoyée est utilisée comme résultat de la fonction.
 
 Exemple :
+
 ```py
 def add(a, b):
     return a + b
@@ -376,9 +390,10 @@ result = add(3, 4) # result=7
 ```
 
 7. Fonctions en tant qu'objets
-    En Python, les fonctions sont des objets de première classe, ce qui signifie qu'elles peuvent être utilisées comme des variables, affectées à d'autres variables, passées en argument à d'autres fonctions et renvoyées en tant que résultat de fonction.
+   En Python, les fonctions sont des objets de première classe, ce qui signifie qu'elles peuvent être utilisées comme des variables, affectées à d'autres variables, passées en argument à d'autres fonctions et renvoyées en tant que résultat de fonction.
 
 Exemple :
+
 ```py
 def add(a, b):
     return a + b
@@ -388,41 +403,36 @@ def apply(func, a, b):
 
 result = apply(add, 3, 4) # result=7
 ```
+
 8. Utilisation de fonctions anonymes (lambda)
-     Python, les fonctions anonymes peuvent être définies en utilisant la syntaxe lambda. Les fonctions lambda sont généralement plus courtes et moins complexes que les fonctions régulières.
+   Python, les fonctions anonymes peuvent être définies en utilisant la syntaxe lambda. Les fonctions lambda sont généralement plus courtes et moins complexes que les fonctions régulières.
 
 Exemple :
+
 ```py
 greet = lambda name: print(f"Hello, {name}!")
 
 greet("Alice") # "Hello, Alice!"
 ```
-## Les classes 
+
+## Les classes
 
 1. Introduction
-    Dans ce guide, nous aborderons les bases des classes et des objets en Python. Les classes sont des modèles ou des blueprints pour la création d'objets, tandis que les objets sont des instances de classes qui représentent des entités spécifiques dans un programme.
+   Dans ce guide, nous aborderons les bases des classes et des objets en Python. Les classes sont des modèles ou des blueprints pour la création d'objets, tandis que les objets sont des instances de classes qui représentent des entités spécifiques dans un programme.
 
-Response: 
+Response:
 2. Classes
     Une classe est un modèle ou un blueprint pour la création d'objets. En Python, une classe est définie à l'aide du mot-clé class, suivi du nom de la classe et de deux points. Voici un exemple de définition de classe:
-    ```py
-        class MonAnimal:
-        pass
-    ```
+    ``py         class MonAnimal:         pass     ``
 Dans cet exemple, la classe MonAnimal est définie sans `attributs` ni `méthodes`.
 
-Response: 
+Response:
 3. Attributs
     Les attributs sont des variables associées à une instance de classe. En Python, les attributs peuvent être définis à l'intérieur ou à l'extérieur d'une méthode (comme __init__ pour l'initialisation). Voici un exemple de définition d'attributs:
-    ```py
-    class MonAnimal:
-    def __init__(self, nom, age):
-        self.nom = nom
-        self.age = age
-    ```
+    ``py     class MonAnimal:     def __init__(self, nom, age):         self.nom = nom         self.age = age     ``
 Dans cet exemple, la classe ``MonAnimal`` possède deux attributs: `nom` et `age`.
 
-Response: 
+Response:
 4. Méthodes
     Les méthodes sont des fonctions associées à une instance de classe. En Python, les méthodes sont définies à l'intérieur d'une classe. Voici un exemple de définition d'une méthode:
     ```py
@@ -434,43 +444,39 @@ Response:
     def manger(self):
         print(f"{self.nom} mange.")
     ```
-Dans cet exemple, la classe MonAnimal possède une méthode appelée `manger`.
+Dans cet exemple, la classe MonAnimal possède une méthode appelée`manger`.
 
-Response: 
+Response:
 5. Objets
     Un objet est une instance de classe qui représente une entité spécifique dans un programme. En Python, un objet est créé en appelant une classe avec les arguments nécessaires pour l'initialisation des attributs. Voici un exemple de création d'un objet:
-    ```py
-    mon_animal = MonAnimal("Chat", 5)
-    ```
+    ``py     mon_animal = MonAnimal("Chat", 5)     ``
 
 Dans cet exemple, la variable mon_animal est un objet de la classe `MonAnimal`.
 
-Response: 
+Response:
 6. Utilisation des objets
     Les objets peuvent être utilisés pour accéder et manipuler leurs attributs et méthodes. Voici un exemple d'utilisation d'un objet:
-    ```py
-    mon_animal.manger()
-    print(mon_animal.nom)
-    print(mon_animal.age)
-    ```
+    ``py     mon_animal.manger()     print(mon_animal.nom)     print(mon_animal.age)     ``
 Dans cet exemple, la méthode manger de l'objet `mon_animal` est appelée pour afficher un message. Les attributs nom et age de l'objet `mon_animal` sont également accédés et affichés.
 
 En conclusion, les classes et les objets en Python sont des éléments essentiels pour la programmation orientée objet. Les classes sont des modèles ou des blueprints pour la création d'objets, tandis que les objets sont des instances de classes qui représentent des entités spécifiques dans un programme.
 
 7. Héritage
-    L'héritage est un concept important en programmation orientée objet, qui permet à une classe d'hériter des attributs et méthodes d'une autre classe. En Python, l'héritage est réalisé en utilisant le signe deux points : pour indiquer que la classe qui suit hérite des attributs et méthodes de la classe précédente. 
-    Voici un exemple d'héritage:
-    ```py
-    class Animal:
-    def __init__(self, nom, age):
-        self.nom = nom
-        self.age = age
+   L'héritage est un concept important en programmation orientée objet, qui permet à une classe d'hériter des attributs et méthodes d'une autre classe. En Python, l'héritage est réalisé en utilisant le signe deux points : pour indiquer que la classe qui suit hérite des attributs et méthodes de la classe précédente.
+   Voici un exemple d'héritage:
+   ```py
+   class Animal:
+   def __init__(self, nom, age):
+       self.nom = nom
+       self.age = age
 
-    def manger(self):
-        print(f"{self.nom} mange.")
+   def manger(self):
+       print(f"{self.nom} mange.")
 
-    class MonAnimal(Animal):
-    pass
+   class MonAnimal(Animal):
+   pass
+   ```
+
 ```
 Dans cet exemple, la classe `MonAnimal` hérite des attributs et méthodes de la classe Animal.
 
@@ -509,9 +515,10 @@ Dans cet exemple, la fonction animal_manger peut être utilisée avec des objets
 En conclusion, la pratique de l'héritage et du polymorphisme en Python permet de créer des programmes plus flexibles et réutilisables. L'héritage permet à une classe d'hériter des attributs et méthodes d'une autre classe, tandis que le polymorphisme permet à une classe de prendre plusieurs formes.
 
 
+## Gestion des exception
 
-
-
-
-
-
+- En python, les exception ssont gérées à l'aide des blocs try, except, else, et éventuellement finally.
+- Le bloc try contient le code susceptible de générer une exception.
+- Le bloc except spécifie le code à exécuter si une exception est levée.
+- Le bloc else (optionnel) contient le code à exécuter si aucune exception n'est levée.
+- Le bloc finally (optionnel) contient le code qui s'exécute toujours, que des exceptions soient levées ou non.
