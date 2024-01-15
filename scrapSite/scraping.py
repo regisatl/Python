@@ -1,7 +1,6 @@
-import requests
 from bs4 import BeautifulSoup
 import re
-
+import requests
 
 class Scraping:
     def __init__ (self, url):
