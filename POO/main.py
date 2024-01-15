@@ -1,38 +1,54 @@
 import csv
-from contact_manager import ContactManager
+import contact_manager
+
+def main():
+    manager = contact_manager.ContactManager()
+
+    while True:
+        print("\n1. Add a new contact")
+        print("2. Show all contacts")
+        print("3. Update the contact")
+        print("4. Delete the contact")
+        print("5. Exit the application")
+
+        choice = input("Select one of the following : ")
+
+        if choice == "1":
+            firstname = input("Enter your first name : ")
+            lastname = input("Enter your last name : ")
+            phoneNumber = input("Enter your phone number : ")
+            address = input("Enter your address : ")
+            email = input("Enter your email address : ")
+            contact = contact_manager.Contact(firstname, lastname, phoneNumber, address, email)
+            print(contact)
+            manager.add_contact(contact)
+            # with open('contacts.csv', 'a', newline='') as file:
+            #     writer = csv.writer(file)
+            #     for contact in manager.contacts:
+            #         writer.writerow([contact.firstname, contact.lastname, contact.phoneNumber, contact.address, contact.email])
+        elif choice == "2":
+            with open('contacts.csv', 'r') as file:
+                reader = csv.reader(file)
+                for row in reader:
+                    if row:  
+                        contact = contact_manager.Contact(row[0], row[1], row[2], row[3], row[4])
+                        manager.view_contacts()
+
+        elif choice == "3":
+            firstname = input("Enter your first name for update: ")
+            lastname = input("Enter your last name for update : ")
+            phoneNumber = input("Enter yourphone number for update : ")
+            address = input("Enter youraddress for update : ")
+            email = input("Enter your email for update : ")
+            manager.update_contact(firstname, lastname, phoneNumber, address, email)
+        elif choice == "4":
+            firstname = input("Enter your first name for delete : ")
+            lastname = input("Enter your last name for delete : ")
+            manager.delete_contact(firstname, lastname)
+        elif choice == "5":
+            break
+        else:
+            print("Invalid choice. Please try again")
 
 if __name__ == "__main__":
-      contact_manager = ContactManager()
-
-      while True:
-            print("1. Ajouter un nouveau contact")
-            print("2. Afficher tous les contacts")
-            print("3. Mettre à jour un contact")
-            print("4. Supprimer un contact")
-            print("5. Quitter l'application")
-            choice = input("Veuillez saisir votre choix: ")
-
-            if choice == "1":
-                  nom = input("Veuillez saisir le nom: ")
-                  prenom = input("Veuillez saisir le prenom: ")
-                  telephone = input("Veuillez saisir le numéro de téléphone: ")
-                  adresse = input("Veuillez saisir l'adresse: ")
-                  email = input("Veuillez saisir l'email: ")
-                  contact_manager.ajouter_contact(nom, prenom, telephone, adresse, email)
-                  with open('contacts.csv', 'a', encoding='utf-8', newline="") as fichier_csv:
-                        writer = csv.writer(fichier_csv)
-                        writer.writerows(f"{nom}, {prenom},{telephone},{adresse},{email}\n")
-            elif choice == "2":
-                  contact_manager.afficher_contacts()
-            elif choice == "3":
-                  contact_manager.mettre_a_jour_contact(nom, prenom, telephone, adresse, email)
-            elif choice == "4":
-                  contact_manager.supprimer_contact(nom, prenom, telephone, adresse, email)
-            elif choice == "5":
-                  break
-            else:
-                  print("Veuillez saisir un numéro de choix valide")
-     
-      
-      
-      
+    main()
