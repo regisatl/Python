@@ -17,7 +17,7 @@ def extractUrlsData():
       except requests.exceptions.Timeout as errt:
             print(f"Timeout Error: {errt}")
       except requests.exceptions.RequestException as err:
-            print(f"OOps: Something Else {err}")
+            print(f"Oups: Something Else {err}")
 
       if request.status_code == 200:
             
@@ -39,16 +39,15 @@ def extractUrlsData():
                               urls.append(urLink)
                  elif url.startswith("#"):
                         pass
-            return urls  
-      
-      else:
-            print(f"Impossible to scrape this page, its status code is : {request.status_code}")
+            return urls 
+      else :
+            print(f"Impossible de scrapper cette page car son status code est : {request.status_code} ") 
 
 extractData = extractUrlsData()
 
 def getAllPagesScraping(link):
       try:
-            requete = requests.get(link, headers=headers)
+            requete = requests.get(link, headers=headers, timeout=10)
             requete.raise_for_status() 
       except requests.exceptions.HTTPError as errh:
             print(f"HTTP Error: {errh}")
@@ -59,23 +58,26 @@ def getAllPagesScraping(link):
       except requests.exceptions.RequestException as err:
             print(f"Oups: Something Else {err}")
 
-            if requete.status_code == 200:
+      if 'requete' in locals() and requete.status_code == 200:
 
-                  textSoup = BeautifulSoup(requete.content, 'html.parser')
-                  text_content = textSoup.get_text()
-                  cleaned_text = re.sub(r'\s+', ' ', text_content)
+            textSoup = BeautifulSoup(requete.content, 'html.parser')
+            text_content = textSoup.get_text()
+            cleaned_text = re.sub(r'\s+', ' ', text_content)
 
-                  with open('nexity.txt', "a", encoding="utf-8") as file :
-                        file.write(f"Lien: {link}\n") 
-                        file.write(f"Contenu de la la page: {cleaned_text}\n\n")
-            else: 
-                  print("Requete is not assigned a value.")
-      except UnboundLocalError:
-            print("Requete is not defined in the current local scope.")
-
+            with open('nexity.txt', "a", encoding="utf-8") as file :
+                  file.write(f"Lien de la page: {link}\n\n") 
+                  file.write(f"Contenu de la page: {cleaned_text}\n\n")
+      else:
+            print(f"Impossible de scrapper cette page car son status code est : {requete.status_code} ")
+  
 def getAllDataPages() :
       pages = extractData
       for page in pages:
             getAllPagesScraping(link=page)
             print(f"On scrappe : {page} ")             
-getAllDataPages()
+
+if __name__ == '__main__':
+      getAllDataPages()
+      print("Le contenu de toutes les pages a été enregistré avec succès")
+else:
+      print("Impossible de récupérer le contenu de toutes les pages")
