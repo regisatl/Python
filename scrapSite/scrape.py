@@ -8,7 +8,7 @@ headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gec
 
 def extractUrlsData():
       try:
-            request = requests.get(baseUrl, headers=headers)
+            request = requests.get(baseUrl, headers=headers, timeout=10)
             request.raise_for_status() 
       except requests.exceptions.HTTPError as errh:
             print(f"HTTP Error: {errh}")
@@ -46,6 +46,7 @@ def extractUrlsData():
 extractData = extractUrlsData()
 
 def getAllPagesScraping(link):
+      requete = None  # Initialize requete to None
       try:
             requete = requests.get(link, headers=headers, timeout=10)
             requete.raise_for_status() 
@@ -58,7 +59,7 @@ def getAllPagesScraping(link):
       except requests.exceptions.RequestException as err:
             print(f"Oups: Something Else {err}")
 
-      if 'requete' in locals() and requete.status_code == 200:
+      if requete and requete.status_code == 200:
 
             textSoup = BeautifulSoup(requete.content, 'html.parser')
             text_content = textSoup.get_text()
@@ -67,7 +68,7 @@ def getAllPagesScraping(link):
             with open('nexity.txt', "a", encoding="utf-8") as file :
                   file.write(f"Lien de la page: {link}\n\n") 
                   file.write(f"Contenu de la page: {cleaned_text}\n\n")
-      else:
+      elif requete is not None:
             print(f"Impossible de scrapper cette page car son status code est : {requete.status_code} ")
   
 def getAllDataPages() :
