@@ -1,6 +1,11 @@
 import csv
 import contact_manager
 
+def add_contact_to_csv(contact):
+    with open('contacts.csv', 'a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([contact.firstname, contact.lastname, contact.phoneNumber, contact.address, contact.email])
+
 def main():
     manager = contact_manager.ContactManager()
 
@@ -20,20 +25,10 @@ def main():
             address = input("Enter your address : ")
             email = input("Enter your email address : ")
             contact = contact_manager.Contact(firstname, lastname, phoneNumber, address, email)
-            print(contact)
             manager.add_contact(contact)
-            # with open('contacts.csv', 'a', newline='') as file:
-            #     writer = csv.writer(file)
-            #     for contact in manager.contacts:
-            #         writer.writerow([contact.firstname, contact.lastname, contact.phoneNumber, contact.address, contact.email])
+            add_contact_to_csv(contact)
         elif choice == "2":
-            with open('contacts.csv', 'r') as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    if row:  
-                        contact = contact_manager.Contact(row[0], row[1], row[2], row[3], row[4])
-                        manager.view_contacts()
-
+            manager.view_contacts()
         elif choice == "3":
             firstname = input("Enter your first name for update: ")
             lastname = input("Enter your last name for update : ")
