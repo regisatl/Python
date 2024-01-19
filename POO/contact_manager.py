@@ -14,12 +14,13 @@ class ContactManager:
     def add_contact(self, contact):
         self.contacts.append(contact)
         print("Contact added with success !!!")
+        print(self.contacts)
         return contact
 
     def view_contacts(self):
         for contact in self.contacts:
             print(
-                f"Your firstname: {contact.firstname} \nYour lastaname: {contact.lastname} \nYour phone number: {contact.phoneNumber} \nYour address: {contact.address} \nYour email: {contact.email}"
+                f"Your firstname: {contact.firstname} \nYour lastaname: {contact.lastname} \nYour phone number: {contact.phoneNumber} \nYour address: {contact.address} \nYour email: {contact.email}\n\n"
             )
 
     def update_contact(self, firstname, lastname, phoneNumber, address, email):

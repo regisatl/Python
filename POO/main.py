@@ -1,6 +1,49 @@
 import csv
-from contact_manager import Contact, ContactManager
+class Contact:
+    def __init__(self, firstname, lastname, phoneNumber, address, email):
+        self.firstname = firstname
+        self.lastname = lastname
+        self.phoneNumber = phoneNumber
+        self.address = address
+        self.email = email
 
+
+class ContactManager:
+    def __init__(self):
+        self.contacts = []
+
+    def add_contact(self, contact):
+        self.contacts.append(contact)
+        print("Contact added with success !!!")
+        return self.contacts
+
+    def view_contacts(self):
+        for contact in self.contacts:
+            print(
+                f"Your firstname: {contact.firstname} \nYour lastaname: {contact.lastname} \nYour phone number: {contact.phoneNumber} \nYour address: {contact.address} \nYour email: {contact.email}\n\n"
+            )
+
+    def update_contact(self, firstname, lastname, phoneNumber, address, email):
+        for contact in self.contacts:
+            if contact.firstname == firstname and contact.lastname == lastname:
+                contact.firstname = firstname
+                contact.lastname = lastname
+                contact.phoneNumber = phoneNumber
+                contact.address = address
+                contact.email = email
+                print("Contact updated with success !!!")
+                return contact
+        print("Contact not found.")
+        return None
+
+    def delete_contact(self, firstname, lastname):
+        for contact in self.contacts:
+            if contact.firstname == firstname and contact.lastname == lastname:
+                self.contacts.remove(contact)
+                print("Contact deleted with success !!!")
+                return contact
+        print("Contact not found.")
+        return None
 
 def add_contact_to_csv(contact):
     with open("contacts.csv", "a", newline="") as file:
@@ -35,9 +78,13 @@ def main():
             address = input("Enter your address : ")
             email = input("Enter your email address : ")
             contact = Contact(firstname, lastname, phoneNumber, address, email)
+            print(contact)
             added_contact = manager.add_contact(contact)
             if added_contact:
-                add_contact_to_csv(added_contact)
+                add_contact_to_csv(contact)
+                print("Contact added in file csv")
+            else:
+                print("Contact not add in file csv")
         elif choice == "2":
             manager.view_contacts()
         elif choice == "3":
