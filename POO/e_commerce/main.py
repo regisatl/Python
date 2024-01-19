@@ -1,15 +1,15 @@
 import csv  # Importe le module csv pour lire et écrire des fichiers csv.
 import mysql.connector  # Importe le module mysql.connector pour se connecter à une base de données MySQL.
-
+from mysql.connector import Error  # Importe la classe Error du module mysql.connector pour gérer les erreurs.
 
 class Produit:  # Définit une classe Produit.
-    def __init__(
-        self, id, nom, prix
-    ):  # Initialise la classe avec un id, un nom et un prix.
-        self.id = id  # Attribut id du produit.
-        self.nom = nom  # Attribut nom du produit.
-        self.prix = prix  # Attribut prix du produit.
+      def __init__(self, id, nom, prix):  # Initialise la classe avec un id, un nom et un prix.
+            self.id = id  # Attribut id du produit.
+            self.nom = nom  # Attribut nom du produit.
+            self.prix = prix  # Attribut prix du produit.
 
+      def __str__(self):  # Méthode pour convertir un objet Produit en chaîne de caractères.
+            return f"{self.id} - {self.nom} - {self.prix}"  # Retourne la chaîne de caractères correspondant au produit.
 
 class BaseDeDonnees:  # Définit une classe BaseDeDonnees.
       def __init__(self, host="localhost", user="root", password=""):  # Initialise la classe avec un hôte, un utilisateur et un mot de passe.
@@ -19,26 +19,36 @@ class BaseDeDonnees:  # Définit une classe BaseDeDonnees.
             self.connect()  # Appelle la méthode connect pour se connecter à la base de données.
 
       def connect(self):  # Méthode pour se connecter à la base de données.
-            self.cnx = mysql.connector.connect(
-                host=self.host, user=self.user, password=self.password
-            )  # Crée une connexion à la base de données.
-            self.cursor = (
-                self.cnx.cursor()
-            )  # Crée un curseur pour exécuter des requêtes SQL.
-
+            try:  # Essaie d'exécuter le bloc de code suivant.
+                  self.cnx = mysql.connector.connect(host=self.host, user=self.user, password=self.password)  # Crée une connexion à la base de données.
+                  self.cursor = (self.cnx.cursor())  # Crée un curseur pour exécuter des requêtes SQL.
+                  print("Connexion à la base de données réussie.")  # Affiche un message de connexion réussie.
+            except Error as e:  # Si une erreur est survenue lors de la connexion à la base de données.
+                  print(f"Erreur lors de la connexion à la base de données : {e}")  # Affiche un message d'erreur.
+            
       def close(self):  # Méthode pour fermer la connexion à la base de données.
-            self.cnx.close()  # Ferme la connexion à la base de données.
+            if (self.cnx.is_connected()):  # Si la connexion à la base de données est ouverte.
+                  self.cursor.close()  # Ferme le curseur.
+                  self.cnx.close()  # Ferme la connexion à la base de données.
+                  print("MySQL connection is closed")  # Affiche un message indiquant que la connexion à la base de données est fermée.
 
       def execute_query(self, query):  # Méthode pour exécuter une requête SQL.
-            mycursor = self.cnx.cursor()  # Crée un nouveau curseur.
-            mycursor.execute(query)  # Exécute la requête SQL.
-            self.cnx.commit()  # Valide les modifications dans la base de données.
+            try:  # Essaie d'exécuter le bloc de code suivant.
+                  mycursor = self.cnx.cursor()  # Crée un nouveau curseur.
+                  mycursor.execute(query)  # Exécute la requête SQL.
+                  self.cnx.commit()  # Valide les modifications dans la base de données.
+                  print("Requête SQL exécutée avec succès.")  # Affiche un message de requête SQL exécutée avec succès.
+            except Error as e:  # Si une erreur est survenue lors de l'exécution de la requête SQL.
+                  print(f"Erreur lors de l'exécution de la requête SQL : {e}")  # Affiche un message d'erreur.
 
       def create_table(self, table_name, columns):      # Méthode pour créer une table dans la base de données.
-            
-            self.execute_query(f"CREATE DATABASE IF NOT EXISTS e_commerce")  # Crée une base de données si elle n'existe pas.
-            self.cnx.database = "e_commerce"  # Sélectionne la base de données.
-            mycursor = self.cnx.cursor()  # Crée un nouveau curseur.
+            try:  # Essaie d'exécuter le bloc de code suivant.
+                  self.execute_query(f"CREATE DATABASE IF NOT EXISTS e_commerce")  # Crée une base de données si elle n'existe pas.
+                  self.cnx.database = "e_commerce"  # Sélectionne la base de données.
+                  mycursor = self.cnx.cursor()  # Crée un nouveau curseur.
+                  mycursor.execute(f"CREATE TABLE IF NOT EXISTS {table_name} ({columns})")  # Crée une table si elle n'existe pas.
+            except Error as e:  # Si une erreur est survenue lors de la création de la table.
+                  print(f"Erreur lors de la création de la table : {e}")  # Affiche un message d'erreur.
             
             query = f"CREATE TABLE {table_name} ("  # Débute la requête SQL pour créer une table.
             for column in columns:  # Pour chaque colonne dans la liste des colonnes.
@@ -49,25 +59,7 @@ class BaseDeDonnees:  # Définit une classe BaseDeDonnees.
             mycursor.execute(query)  # Exécute la requête SQL.
             self.cnx.commit()  # Valide les modifications dans la base de données.
 
-
-if __name__ == "__main__":  # Si le script est exécuté directement (et non importé).
-      
-      bd = BaseDeDonnees()  # Crée une instance de la classe BaseDeDonnees.
-      
-      bd.create_table(  # Appelle la méthode create_table.
-          "produit",  # Nom de la table à créer.
-          [  # Liste des colonnes à créer.
-              "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY",  # Colonne id.
-              "nom VARCHAR(255) NOT NULL",  # Colonne nom.
-              "prix INT NOT NULL",  # Colonne prix.
-          ],
-      )
-      
-      bd.close()  # Ferme la connexion à la base de données.
-      print("Base de données créée avec succès")  # Affiche un message de succès.
-
 # Panier : Une classe représentant le panier de l'utilisateur. Elle doit permettre d'ajouter des produits avec la quantité et de calculer le total.
-
 class Panier:  # Définit une classe Panier.
       def __init__(self):  # Initialise la classe.
             self.produits = []  # Attribut produits du panier.
@@ -83,7 +75,6 @@ class Panier:  # Définit une classe Panier.
                 print(f"Total : {self.total}***")  # Affiche le total du panier.
 
 # LigneFacture : Une classe représentant une ligne dans la facture. Elle doit contenir un produit, une quantité et permettre de calculer le prix total de la ligne.
-
 
 class LigneFacture:  # Définit une classe LigneFacture.
       def __init__(self, produit, quantite):      # Initialise la classe avec un produit et une quantité.
@@ -122,3 +113,35 @@ class Facture:  # Définit une classe Facture.
                   reader = csv.reader(fichier)  # Crée un lecteur csv.
                   for ligne in reader:  # Pour chaque ligne dans le fichier.
                         print(ligne)  # Affiche la ligne.
+
+
+if __name__ == "__main__":  # Si le script est exécuté directement (et non importé).
+      bd = BaseDeDonnees(host="localhost", user="root", password="")  # Crée un objet de la classe BaseDeDonnees. Remplacez par vos informations d'identification.
+      bd.create_table(  # Appelle la méthode create_table de l'objet BaseDeDonnees.
+          "produit",  # Nom de la table à créer.
+          [  # Liste des colonnes de la table.
+              "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY",  # Colonne id.
+              "nom VARCHAR(255) NOT NULL",  # Colonne nom.
+              "prix INT NOT NULL",  # Colonne prix.
+          ],
+      )
+      bd.close()  # Ferme la connexion à la base de données.
+      print("Base de données créée avec succès")  # Affiche un message indiquant que la base de données a été créée avec succès.
+
+      # Création de quelques produits
+      produit1 = Produit(1, "Produit 1", 10)
+      produit2 = Produit(2, "Produit 2", 20)
+
+      # Ajout des produits au panier
+      panier = Panier()
+      panier.ajouter_produit(produit1, 2)
+      panier.ajouter_produit(produit2, 3)
+      panier.afficher_panier()
+
+      # Création d'une ligne de facture
+      ligne = LigneFacture(produit1, 2)
+      ligne.afficher_ligne()
+
+      # Création d'une facture à partir du panier
+      facture = Facture(panier)
+      facture.afficher_facture()      
