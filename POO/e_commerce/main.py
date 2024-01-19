@@ -10,7 +10,7 @@ class Produit:  # Définit une classe Produit.
 
       def __str__(self):  # Méthode pour convertir un objet Produit en chaîne de caractères.
             return f"{self.id} - {self.nom} - {self.prix}"  # Retourne la chaîne de caractères correspondant au produit.
-
+      
 class BaseDeDonnees:  # Définit une classe BaseDeDonnees.
       def __init__(self, host="localhost", user="root", password=""):  # Initialise la classe avec un hôte, un utilisateur et un mot de passe.
             self.host = host  # Attribut hôte de la base de données.
@@ -59,30 +59,32 @@ class BaseDeDonnees:  # Définit une classe BaseDeDonnees.
             mycursor.execute(query)  # Exécute la requête SQL.
             self.cnx.commit()  # Valide les modifications dans la base de données.
 
-      # Méthode pour insérer dans une table des données dans la base de données avec la commande INSERT INTO
-      def insert_table(self, table_name, columns, values):
+      def insert_table(self, table_name, columns, values): # Méthode pour insérer dans une table des données dans la base de données avec la commande INSERT INTO
             try:  # Essaie d'exécuter le bloc de code suivant.
+                  self.execute_query(f"CREATE DATABASE IF NOT EXISTS e_commerce")  # Crée une base de données si elle n'existe pas.
+                  self.cnx.database = "e_commerce"  # Sélectionne la base de données.
                   mycursor = self.cnx.cursor()  # Crée un nouveau curseur.
                   mycursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES ({values})")  # Crée une table si elle n'existe pas.
             except Error as e:  # Si une erreur est survenue lors de la création de la table.
                   print(f"Erreur lors de l'ajout des données dans la table : {e}")  # Affiche un message d'erreur.
             
-      # Méthode pour mettre à jour dans une table des données dans la base de données avec la commande UPDATE SET
-      def update_table(self, table_name, columns, values, condition):
+      def update_table(self, table_name, columns, values, condition): # Méthode pour mettre à jour dans une table des données dans la base de données avec la commande UPDATE SET
             try:  # Essaie d'exécuter le bloc de code suivant.
+                  self.execute_query(f"CREATE DATABASE IF NOT EXISTS e_commerce")  # Crée une base de données si elle n'existe pas.
+                  self.cnx.database = "e_commerce"  # Sélectionne la base de données.
                   mycursor = self.cnx.cursor()  # Crée un nouveau curseur.
                   mycursor.execute(f"UPDATE {table_name} SET {columns} = {values} WHERE {condition}")  # Crée une table si elle n'existe pas.
             except Error as e:  # Si une erreur est survenue lors de la création de la table.
                   print(f"Erreur lors de la mise à jour des données dans la table : {e}")  # Affiche un message d'erreur.
                   
-      # Méthode pour supprimer une table dans la base de données avec la commande DROP TABLE
-      def drop_table(self, table_name):
+      def drop_table(self, table_name): # Méthode pour supprimer une table dans la base de données avec la commande DROP TABLE
             try:  # Essaie d'exécuter le bloc de code suivant.
+                  self.execute_query(f"CREATE DATABASE IF NOT EXISTS e_commerce")  # Crée une base de données si elle n'existe pas.
+                  self.cnx.database = "e_commerce"  # Sélectionne la base de données.
                   mycursor = self.cnx.cursor()  # Crée un nouveau curseur.
                   mycursor.execute(f"DROP TABLE {table_name}")  # Crée une table si elle n'existe pas.
             except Error as e:  # Si une erreur est survenue lors de la création de la table.
                   print(f"Erreur lors de la suppression de la table : {e}")  # Affiche un message d'erreur.
-
 
 # Panier : Une classe représentant le panier de l'utilisateur. Elle doit permettre d'ajouter des produits avec la quantité et de calculer le total.
 class Panier:  # Définit une classe Panier.
@@ -102,12 +104,15 @@ class Panier:  # Définit une classe Panier.
 # LigneFacture : Une classe représentant une ligne dans la facture. Elle doit contenir un produit, une quantité et permettre de calculer le prix total de la ligne.
 
 class LigneFacture:  # Définit une classe LigneFacture.
-      def __init__(self, produit, quantite):      # Initialise la classe avec un produit et une quantité.
+      def __init__(self, produit, quantite):  # Initialise la classe avec un produit et une quantité.
             self.produit = produit  # Attribut produit de la ligne de facture.
             self.quantite = quantite  # Attribut quantité de la ligne de facture.
             self.prix = produit.prix * quantite  # Attribut prix de la ligne de facture.
             self.total = self.prix  # Attribut total de la ligne de facture.
 
+      def __str__(self): # Méthode pour convertir un objet LigneFacture en chaîne de caractères.
+            return f"{self.produit.nom} : {self.quantite} x {self.prix} = {self.prix * self.quantite}"  # Affiche le produit, la quantité et le sous-total.
+      
       def afficher_ligne(self):  # Méthode pour afficher la ligne de facture.
             print(f"{self.produit.nom} : {self.quantite} x {self.prix} = {self.prix * self.quantite}")  # Affiche le produit, la quantité et le sous-total.
             print(f"Total : {self.total} ***")  # Affiche le total de la ligne de facture.
@@ -121,6 +126,9 @@ class Facture:  # Définit une classe Facture.
             self.prix_total = self.prix_unitaire * len(self.produits)  # Attribut prix total de la facture.
             self.file_csv = "facture.csv"  # Attribut nom de fichier de la facture.
             self.creer_fichier()  # Appelle la méthode creer_fichier pour créer un fichier csv.
+
+      def __str__(self): # Méthode pour convertir un objet Facture en chaîne de caractères.
+            return f"Total : {self.total}\nPrix unitaire : {self.prix_unitaire}\nPrix total : {self.prix_total}"  # Affiche le total, le prix unitaire et le prix total.
 
       def creer_fichier(self):  # Méthode pour créer un fichier csv.
             with open(self.file_csv, "a", encoding="utf-8", newline="") as fichier:  # Ouvre le fichier en mode écriture.
@@ -141,38 +149,20 @@ class Facture:  # Définit une classe Facture.
 
 
 if __name__ == "__main__":  # Si le script est exécuté directement (et non importé).
-      
-      # bd = BaseDeDonnees(host="localhost", user="root", password="")  # Crée un objet de la classe BaseDeDonnees. Remplacez par vos informations d'identification.
-      
-      # bd.create_table("produits", "id INTEGER PRIMARY KEY AUTO_INCREMENT, nom VARCHAR(50), prix FLOAT")  # Crée la table produits.
-      # print("Table produits créée avec succès")  # Affiche un message indiquant que la table produits a été créée avec succès.
-      
-      # bd.create_table("panier", "id INTEGER PRIMARY KEY AUTO_INCREMENT, produit_id INT , quantite INT NOT NULL, FOREIGN KEY (produit_id) REFERENCES produit(id)")  # Crée la table panier.
-      # print("Table panier créée avec succès")  # Affiche un message indiquant que la table panier a été créée avec succès.
-      
-      # bd.create_table("facture", "id INTEGER PRIMARY KEY AUTO_INCREMENT, panier_id INT NOT NULL, FOREIGN KEY (panier_id) REFERENCES panier(id)")  # Crée la table facture.
-      # print("Table facture créée avec succès")  # Affiche un message indiquant que la table facture a été créée avec succès.
-      
-      # bd.create_table("lignefacture", "id INTEGER PRIMARY KEY AUTO_INCREMENT, facture_id INT NOT NULL, produit_id INT NOT NULL, quantite INT NOT NULL, FOREIGN KEY (facture_id) REFERENCES facture(id), FOREIGN KEY (produit_id) REFERENCES produit(id)")  # Crée la table lignefacture.
-      # print("Table lignefacture créée avec succès")  # Affiche un message indiquant que la table lignefacture a été créée avec succès.
-      
-      # bd.close()  # Ferme la connexion à la base de données.
-      # print("Base de données créée avec succès")  # Affiche un message indiquant que la base de données a été créée avec succès.
 
-      # Création de quelques produits
-      produit1 = Produit(1, "Produit 1", 10)
-      produit2 = Produit(2, "Produit 2", 20)
+      database = BaseDeDonnees()
+      columns = "id, nom, prix"
+      values = "'2', 'Pizza', '1000'"
+      table_name = "produits"
+      database.insert_table(table_name, columns, values)
+      
+      
+      
 
-      # Ajout des produits au panier
-      panier = Panier()
-      panier.ajouter_produit(produit1, 2)
-      panier.ajouter_produit(produit2, 3)
-      panier.afficher_panier()
-
-      # Création d'une ligne de facture
-      ligne = LigneFacture(produit1, 2)
-      ligne.afficher_ligne()
-
-      # Création d'une facture à partir du panier
-      facture = Facture(panier)
-      facture.afficher_facture()      
+      
+      
+      
+       
+      
+      
+        
