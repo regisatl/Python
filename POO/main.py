@@ -1,13 +1,23 @@
 import csv
-import contact_manager
+from contact_manager import Contact, ContactManager
+
 
 def add_contact_to_csv(contact):
-    with open('contacts.csv', 'a', newline='') as file:
+    with open("contacts.csv", "a", newline="") as file:
         writer = csv.writer(file)
-        writer.writerow([contact.firstname, contact.lastname, contact.phoneNumber, contact.address, contact.email])
+        writer.writerow(
+            [
+                contact.firstname,
+                contact.lastname,
+                contact.phoneNumber,
+                contact.address,
+                contact.email,
+            ]
+        )
+
 
 def main():
-    manager = contact_manager.ContactManager()
+    manager = ContactManager()
 
     while True:
         print("\n1. Add a new contact")
@@ -24,9 +34,10 @@ def main():
             phoneNumber = input("Enter your phone number : ")
             address = input("Enter your address : ")
             email = input("Enter your email address : ")
-            contact = contact_manager.Contact(firstname, lastname, phoneNumber, address, email)
-            manager.add_contact(contact)
-            add_contact_to_csv(contact)
+            contact = Contact(firstname, lastname, phoneNumber, address, email)
+            added_contact = manager.add_contact(contact)
+            if added_contact:
+                add_contact_to_csv(added_contact)
         elif choice == "2":
             manager.view_contacts()
         elif choice == "3":
@@ -35,15 +46,22 @@ def main():
             phoneNumber = input("Enter yourphone number for update : ")
             address = input("Enter youraddress for update : ")
             email = input("Enter your email for update : ")
-            manager.update_contact(firstname, lastname, phoneNumber, address, email)
+            updated_contact = manager.update_contact(
+                firstname, lastname, phoneNumber, address, email
+            )
+            if updated_contact:
+                add_contact_to_csv(updated_contact)
         elif choice == "4":
             firstname = input("Enter your first name for delete : ")
             lastname = input("Enter your last name for delete : ")
-            manager.delete_contact(firstname, lastname)
+            deleted_contact = manager.delete_contact(firstname, lastname)
+            if deleted_contact:
+                add_contact_to_csv(deleted_contact)
         elif choice == "5":
             break
         else:
             print("Invalid choice. Please try again")
+
 
 if __name__ == "__main__":
     main()

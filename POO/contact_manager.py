@@ -6,19 +6,21 @@ class Contact:
         self.address = address
         self.email = email
 
+
 class ContactManager:
     def __init__(self):
         self.contacts = []
 
     def add_contact(self, contact):
         self.contacts.append(contact)
-        for info in self.contacts:
-            print(info)
-        print("Contact added with success !!!") 
+        print("Contact added with success !!!")
+        return contact
 
     def view_contacts(self):
         for contact in self.contacts:
-            print(f"Your firstname: {contact.firstname} \nYour lastaname: {contact.lastname} \nYour phone number: {contact.phoneNumber} \nYour address: {contact.address} \nYour email: {contact.email}")
+            print(
+                f"Your firstname: {contact.firstname} \nYour lastaname: {contact.lastname} \nYour phone number: {contact.phoneNumber} \nYour address: {contact.address} \nYour email: {contact.email}"
+            )
 
     def update_contact(self, firstname, lastname, phoneNumber, address, email):
         for contact in self.contacts:
@@ -28,14 +30,16 @@ class ContactManager:
                 contact.phoneNumber = phoneNumber
                 contact.address = address
                 contact.email = email
-                return
-            print("Contact not found.")
+                print("Contact updated with success !!!")
+                return contact
         print("Contact not found.")
+        return None
 
     def delete_contact(self, firstname, lastname):
         for contact in self.contacts:
             if contact.firstname == firstname and contact.lastname == lastname:
                 self.contacts.remove(contact)
-                return
-            print("Contact not found.")
+                print("Contact deleted with success !!!")
+                return contact
         print("Contact not found.")
+        return None
