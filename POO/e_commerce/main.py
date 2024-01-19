@@ -94,15 +94,15 @@ class Facture:  # Définit une classe Facture.
             self.total = panier.total  # Attribut total de la facture.
             self.prix_unitaire = self.total / len(self.produits)  # Attribut prix unitaire de la facture.
             self.prix_total = self.prix_unitaire * len(self.produits)  # Attribut prix total de la facture.
-            self.nom_fichier = "facture.csv"  # Attribut nom de fichier de la facture.
+            self.file_csv = "facture.csv"  # Attribut nom de fichier de la facture.
             self.creer_fichier()  # Appelle la méthode creer_fichier pour créer un fichier csv.
 
       def creer_fichier(self):  # Méthode pour créer un fichier csv.
-            with open(self.nom_fichier, "w", newline="") as fichier:  # Ouvre le fichier en mode écriture.
+            with open(self.file_csv, "a", encoding="utf-8", newline="") as fichier:  # Ouvre le fichier en mode écriture.
                 writer = csv.writer(fichier)  # Crée un écrivain csv.
                 writer.writerows(self.produits)  # Écrit les produits dans le fichier.
                 writer.writerow([self.total, self.prix_unitaire, self.prix_total])  # Écrit le total, le prix unitaire et le prix total dans le fichier.
-                print(f"Fichier {self.nom_fichier} créé avec succès")  # Affiche un message de succès.
+                print(f"Fichier {self.file_csv} créé avec succès")  # Affiche un message de succès.
                 print(self.produits)  # Affiche les produits.
                 print(self.total)  # Affiche le total.
                 print(self.prix_unitaire)  # Affiche le prix unitaire.
@@ -116,15 +116,22 @@ class Facture:  # Définit une classe Facture.
 
 
 if __name__ == "__main__":  # Si le script est exécuté directement (et non importé).
+      
       bd = BaseDeDonnees(host="localhost", user="root", password="")  # Crée un objet de la classe BaseDeDonnees. Remplacez par vos informations d'identification.
-      bd.create_table(  # Appelle la méthode create_table de l'objet BaseDeDonnees.
-          "produit",  # Nom de la table à créer.
-          [  # Liste des colonnes de la table.
-              "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY",  # Colonne id.
-              "nom VARCHAR(255) NOT NULL",  # Colonne nom.
-              "prix INT NOT NULL",  # Colonne prix.
-          ],
-      )
+      
+      bd.create_table("produits", "id INTEGER PRIMARY KEY AUTO_INCREMENT, nom VARCHAR(50), prix INTEGER")  # Crée la table produits.
+      print("Table produits créée avec succès")  # Affiche un message indiquant que la table produits a été créée avec succès.
+      
+      bd.create_table("facture", "id INTEGER PRIMARY KEY AUTO_INCREMENT, nom VARCHAR(50), prix INTEGER")  # Crée la table facture.
+      print("Table facture créée avec succès")  # Affiche un message indiquant que la table facture a été créée avec succès.
+      
+      bd.create_table("panier", "id INTEGER PRIMARY KEY AUTO_INCREMENT, nom VARCHAR(50), prix INTEGER")  # Crée la table panier.
+      print("Table panier créée avec succès")  # Affiche un message indiquant que la table panier a été créée avec succès.
+      
+      bd.create_table("lignefacture", "id INTEGER PRIMARY KEY AUTO_INCREMENT, nom VARCHAR(50), prix INTEGER")  # Crée la table lignefacture.
+      print("Table lignefacture créée avec succès")  # Affiche un message indiquant que la table lignefacture a été créée avec succès.
+      
+
       bd.close()  # Ferme la connexion à la base de données.
       print("Base de données créée avec succès")  # Affiche un message indiquant que la base de données a été créée avec succès.
 
