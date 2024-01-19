@@ -119,19 +119,18 @@ if __name__ == "__main__":  # Si le script est exécuté directement (et non imp
       
       bd = BaseDeDonnees(host="localhost", user="root", password="")  # Crée un objet de la classe BaseDeDonnees. Remplacez par vos informations d'identification.
       
-      # bd.create_table("produits", "id INTEGER PRIMARY KEY AUTO_INCREMENT, nom VARCHAR(50), prix FLOAT")  # Crée la table produits.
-      # print("Table produits créée avec succès")  # Affiche un message indiquant que la table produits a été créée avec succès.
+      bd.create_table("produits", "id INTEGER PRIMARY KEY AUTO_INCREMENT, nom VARCHAR(50), prix FLOAT")  # Crée la table produits.
+      print("Table produits créée avec succès")  # Affiche un message indiquant que la table produits a été créée avec succès.
       
-      # bd.create_table("panier", "id INTEGER PRIMARY KEY AUTO_INCREMENT, produit_id INT , quantite INT NOT NULL, FOREIGN KEY (produit_id) REFERENCES produit(id)")  # Crée la table panier.
-      # print("Table panier créée avec succès")  # Affiche un message indiquant que la table panier a été créée avec succès.
+      bd.create_table("panier", "id INTEGER PRIMARY KEY AUTO_INCREMENT, produit_id INT , quantite INT NOT NULL, FOREIGN KEY (produit_id) REFERENCES produit(id)")  # Crée la table panier.
+      print("Table panier créée avec succès")  # Affiche un message indiquant que la table panier a été créée avec succès.
       
-      # bd.create_table("facture", "id INTEGER PRIMARY KEY AUTO_INCREMENT, panier_id INT NOT NULL, FOREIGN KEY (panier_id) REFERENCES panier(id)")  # Crée la table facture.
-      # print("Table facture créée avec succès")  # Affiche un message indiquant que la table facture a été créée avec succès.
+      bd.create_table("facture", "id INTEGER PRIMARY KEY AUTO_INCREMENT, panier_id INT NOT NULL, FOREIGN KEY (panier_id) REFERENCES panier(id)")  # Crée la table facture.
+      print("Table facture créée avec succès")  # Affiche un message indiquant que la table facture a été créée avec succès.
       
-      # bd.create_table("lignefacture", "id INTEGER PRIMARY KEY AUTO_INCREMENT, facture_id INT NOT NULL, produit_id INT NOT NULL, quantite INT NOT NULL, FOREIGN KEY (facture_id) REFERENCES facture(id), FOREIGN KEY (produit_id) REFERENCES produit(id)")  # Crée la table lignefacture.
-      # print("Table lignefacture créée avec succès")  # Affiche un message indiquant que la table lignefacture a été créée avec succès.
+      bd.create_table("lignefacture", "id INTEGER PRIMARY KEY AUTO_INCREMENT, facture_id INT NOT NULL, produit_id INT NOT NULL, quantite INT NOT NULL, FOREIGN KEY (facture_id) REFERENCES facture(id), FOREIGN KEY (produit_id) REFERENCES produit(id)")  # Crée la table lignefacture.
+      print("Table lignefacture créée avec succès")  # Affiche un message indiquant que la table lignefacture a été créée avec succès.
       
-
       bd.close()  # Ferme la connexion à la base de données.
       print("Base de données créée avec succès")  # Affiche un message indiquant que la base de données a été créée avec succès.
 
