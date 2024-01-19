@@ -59,6 +59,31 @@ class BaseDeDonnees:  # Définit une classe BaseDeDonnees.
             mycursor.execute(query)  # Exécute la requête SQL.
             self.cnx.commit()  # Valide les modifications dans la base de données.
 
+      # Méthode pour insérer dans une table des données dans la base de données avec la commande INSERT INTO
+      def insert_table(self, table_name, columns, values):
+            try:  # Essaie d'exécuter le bloc de code suivant.
+                  mycursor = self.cnx.cursor()  # Crée un nouveau curseur.
+                  mycursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES ({values})")  # Crée une table si elle n'existe pas.
+            except Error as e:  # Si une erreur est survenue lors de la création de la table.
+                  print(f"Erreur lors de l'ajout des données dans la table : {e}")  # Affiche un message d'erreur.
+            
+      # Méthode pour mettre à jour dans une table des données dans la base de données avec la commande UPDATE SET
+      def update_table(self, table_name, columns, values, condition):
+            try:  # Essaie d'exécuter le bloc de code suivant.
+                  mycursor = self.cnx.cursor()  # Crée un nouveau curseur.
+                  mycursor.execute(f"UPDATE {table_name} SET {columns} = {values} WHERE {condition}")  # Crée une table si elle n'existe pas.
+            except Error as e:  # Si une erreur est survenue lors de la création de la table.
+                  print(f"Erreur lors de la mise à jour des données dans la table : {e}")  # Affiche un message d'erreur.
+                  
+      # Méthode pour supprimer une table dans la base de données avec la commande DROP TABLE
+      def drop_table(self, table_name):
+            try:  # Essaie d'exécuter le bloc de code suivant.
+                  mycursor = self.cnx.cursor()  # Crée un nouveau curseur.
+                  mycursor.execute(f"DROP TABLE {table_name}")  # Crée une table si elle n'existe pas.
+            except Error as e:  # Si une erreur est survenue lors de la création de la table.
+                  print(f"Erreur lors de la suppression de la table : {e}")  # Affiche un message d'erreur.
+
+
 # Panier : Une classe représentant le panier de l'utilisateur. Elle doit permettre d'ajouter des produits avec la quantité et de calculer le total.
 class Panier:  # Définit une classe Panier.
       def __init__(self):  # Initialise la classe.
@@ -117,22 +142,22 @@ class Facture:  # Définit une classe Facture.
 
 if __name__ == "__main__":  # Si le script est exécuté directement (et non importé).
       
-      bd = BaseDeDonnees(host="localhost", user="root", password="")  # Crée un objet de la classe BaseDeDonnees. Remplacez par vos informations d'identification.
+      # bd = BaseDeDonnees(host="localhost", user="root", password="")  # Crée un objet de la classe BaseDeDonnees. Remplacez par vos informations d'identification.
       
-      bd.create_table("produits", "id INTEGER PRIMARY KEY AUTO_INCREMENT, nom VARCHAR(50), prix FLOAT")  # Crée la table produits.
-      print("Table produits créée avec succès")  # Affiche un message indiquant que la table produits a été créée avec succès.
+      # bd.create_table("produits", "id INTEGER PRIMARY KEY AUTO_INCREMENT, nom VARCHAR(50), prix FLOAT")  # Crée la table produits.
+      # print("Table produits créée avec succès")  # Affiche un message indiquant que la table produits a été créée avec succès.
       
-      bd.create_table("panier", "id INTEGER PRIMARY KEY AUTO_INCREMENT, produit_id INT , quantite INT NOT NULL, FOREIGN KEY (produit_id) REFERENCES produit(id)")  # Crée la table panier.
-      print("Table panier créée avec succès")  # Affiche un message indiquant que la table panier a été créée avec succès.
+      # bd.create_table("panier", "id INTEGER PRIMARY KEY AUTO_INCREMENT, produit_id INT , quantite INT NOT NULL, FOREIGN KEY (produit_id) REFERENCES produit(id)")  # Crée la table panier.
+      # print("Table panier créée avec succès")  # Affiche un message indiquant que la table panier a été créée avec succès.
       
-      bd.create_table("facture", "id INTEGER PRIMARY KEY AUTO_INCREMENT, panier_id INT NOT NULL, FOREIGN KEY (panier_id) REFERENCES panier(id)")  # Crée la table facture.
-      print("Table facture créée avec succès")  # Affiche un message indiquant que la table facture a été créée avec succès.
+      # bd.create_table("facture", "id INTEGER PRIMARY KEY AUTO_INCREMENT, panier_id INT NOT NULL, FOREIGN KEY (panier_id) REFERENCES panier(id)")  # Crée la table facture.
+      # print("Table facture créée avec succès")  # Affiche un message indiquant que la table facture a été créée avec succès.
       
-      bd.create_table("lignefacture", "id INTEGER PRIMARY KEY AUTO_INCREMENT, facture_id INT NOT NULL, produit_id INT NOT NULL, quantite INT NOT NULL, FOREIGN KEY (facture_id) REFERENCES facture(id), FOREIGN KEY (produit_id) REFERENCES produit(id)")  # Crée la table lignefacture.
-      print("Table lignefacture créée avec succès")  # Affiche un message indiquant que la table lignefacture a été créée avec succès.
+      # bd.create_table("lignefacture", "id INTEGER PRIMARY KEY AUTO_INCREMENT, facture_id INT NOT NULL, produit_id INT NOT NULL, quantite INT NOT NULL, FOREIGN KEY (facture_id) REFERENCES facture(id), FOREIGN KEY (produit_id) REFERENCES produit(id)")  # Crée la table lignefacture.
+      # print("Table lignefacture créée avec succès")  # Affiche un message indiquant que la table lignefacture a été créée avec succès.
       
-      bd.close()  # Ferme la connexion à la base de données.
-      print("Base de données créée avec succès")  # Affiche un message indiquant que la base de données a été créée avec succès.
+      # bd.close()  # Ferme la connexion à la base de données.
+      # print("Base de données créée avec succès")  # Affiche un message indiquant que la base de données a été créée avec succès.
 
       # Création de quelques produits
       produit1 = Produit(1, "Produit 1", 10)
