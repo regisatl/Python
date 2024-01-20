@@ -5,3 +5,5 @@ class Contact:  # Définit une classe Contact.
         self.phoneNumber = phoneNumber  # Attribut pour le numéro de téléphone.
         self.address = address  # Attribut pour l'adresse.
         self.email = email  # Attribut pour l'email.
+
+
