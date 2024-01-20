@@ -1,114 +1,56 @@
-import csv
-class Contact:
-    def __init__(self, firstname, lastname, phoneNumber, address, email):
-        self.firstname = firstname
-        self.lastname = lastname
-        self.phoneNumber = phoneNumber
-        self.address = address
-        self.email = email
+import csv  # Importe le module csv pour lire et écrire des fichiers csv.
+from contact import Contact  
+from contact_manager import ContactManager 
 
+def main():  # Définit la fonction principale pour exécuter le programme.
+    manager = ContactManager()  # Crée un gestionnaire de contacts.
 
-class ContactManager:
-    def __init__(self):
-        self.contacts = []
-
-    def add_contact(self, contact):
-        self.contacts.append(contact)
-        print("Contact added with success !!!")
-        return self.contacts
-
-    def view_contacts(self):
-        for contact in self.contacts:
-            print(
-                f"Your firstname: {contact.firstname} \nYour lastaname: {contact.lastname} \nYour phone number: {contact.phoneNumber} \nYour address: {contact.address} \nYour email: {contact.email}\n\n"
-            )
-
-    def update_contact(self, firstname, lastname, phoneNumber, address, email):
-        for contact in self.contacts:
-            if contact.firstname == firstname and contact.lastname == lastname:
-                contact.firstname = firstname
-                contact.lastname = lastname
-                contact.phoneNumber = phoneNumber
-                contact.address = address
-                contact.email = email
-                print("Contact updated with success !!!")
-                return contact
-        print("Contact not found.")
-        return None
-
-    def delete_contact(self, firstname, lastname):
-        for contact in self.contacts:
-            if contact.firstname == firstname and contact.lastname == lastname:
-                self.contacts.remove(contact)
-                print("Contact deleted with success !!!")
-                return contact
-        print("Contact not found.")
-        return None
-
-def add_contact_to_csv(contact):
-    with open("contacts.csv", "a", newline="") as file:
-        writer = csv.writer(file)
-        writer.writerow(
-            [
-                contact.firstname,
-                contact.lastname,
-                contact.phoneNumber,
-                contact.address,
-                contact.email,
-            ]
-        )
-
-
-def main():
-    manager = ContactManager()
-
-    while True:
-        print("\n1. Add a new contact")
+    while (
+        True
+    ):  # Boucle infinie pour exécuter le programme jusqu'à ce que l'utilisateur décide de quitter.
+        print("\n1. Add a new contact")  # Imprime les options pour l'utilisateur.
         print("2. Show all contacts")
         print("3. Update the contact")
         print("4. Delete the contact")
         print("5. Exit the application")
 
-        choice = input("Select one of the following : ")
+        choice = input("Select one in the following : ")  # Demande à l'utilisateur de faire un choix.
 
-        if choice == "1":
-            firstname = input("Enter your first name : ")
+        if choice == "1":  # Si l'utilisateur choisit d'ajouter un contact.
+            firstname = input("Enter your first name : ")  # Demande à l'utilisateur d'entrer les détails du contact.
             lastname = input("Enter your last name : ")
             phoneNumber = input("Enter your phone number : ")
             address = input("Enter your address : ")
             email = input("Enter your email address : ")
-            contact = Contact(firstname, lastname, phoneNumber, address, email)
-            print(contact)
-            added_contact = manager.add_contact(contact)
-            if added_contact:
-                add_contact_to_csv(contact)
-                print("Contact added in file csv")
+            contact = Contact(firstname, lastname, phoneNumber, address, email)  # Crée un nouveau contact avec les détails donnés.
+            added_contact = manager.add_contact(contact)  # Ajoute le contact au gestionnaire de contacts.
+            if added_contact:  # Si le contact a été ajouté avec succès.
+                manager.add_contact_to_csv(contact)  # Ajoute le contact au fichier csv.
+                print("Contact added in file csv")  # Imprime un message de succès.
             else:
-                print("Contact not add in file csv")
-        elif choice == "2":
-            manager.view_contacts()
-        elif choice == "3":
-            firstname = input("Enter your first name for update: ")
+                print("Contact not add in file csv")  # Imprime un message d'échec.
+        elif choice == "2":  # Si l'utilisateur choisit de voir tous les contacts.
+            manager.view_contacts()  # Affiche tous les contacts.
+        elif choice == "3":  # Si l'utilisateur choisit de mettre à jour un contact.
+            firstname = input("Enter your first name for update: ")  # Demande à l'utilisateur d'entrer les détails du contact.
             lastname = input("Enter your last name for update : ")
             phoneNumber = input("Enter yourphone number for update : ")
             address = input("Enter youraddress for update : ")
             email = input("Enter your email for update : ")
-            updated_contact = manager.update_contact(
-                firstname, lastname, phoneNumber, address, email
-            )
-            if updated_contact:
-                add_contact_to_csv(updated_contact)
-        elif choice == "4":
-            firstname = input("Enter your first name for delete : ")
+            updated_contact = manager.update_contact(firstname, lastname, phoneNumber, address, email) # Met à jour le contact dans le gestionnaire de contacts.
+            if updated_contact:  # Si le contact a été mis à jour avec succès.
+                manager.add_contact_to_csv(updated_contact)  # Ajoute le contact mis à jour au fichier csv.
+        elif choice == "4":  # Si l'utilisateur choisit de supprimer un contact.
+            firstname = input("Enter your first name for delete : ")  # Demande à l'utilisateur d'entrer les noms du contact.
             lastname = input("Enter your last name for delete : ")
-            deleted_contact = manager.delete_contact(firstname, lastname)
-            if deleted_contact:
-                add_contact_to_csv(deleted_contact)
-        elif choice == "5":
-            break
+            deleted_contact = manager.delete_contact(firstname, lastname)  # Supprime le contact du gestionnaire de contacts.
+            if deleted_contact:  # Si le contact a été supprimé avec succès.
+                manager.add_contact_to_csv(deleted_contact)  # Ajoute le contact supprimé au fichier csv.
+        elif choice == "5":  # Si l'utilisateur choisit de quitter l'application.
+            break  # Sort de la boucle infinie.
         else:
-            print("Invalid choice. Please try again")
+            print("Invalid choice. Please try again")  # Imprime un message d'erreur si le choix de l'utilisateur n'est pas valide.
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__":  # Vérifie si le script est exécuté directement.
+    main()  # Appelle la fonction principale pour exécuter le programme.
