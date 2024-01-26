@@ -11,7 +11,7 @@ if __name__ == "__main__":  # Si le script est exécuté directement (et non imp
       values =product
       print(product)
       
-      database.insert_table("produits", "nom, prix", "'A', 10")
+      # database.insert_table(table_name, columns, values)
       
       
       

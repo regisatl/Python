@@ -53,7 +53,7 @@ class BaseDeDonnees:  # Définit une classe BaseDeDonnees.
                   self.cnx.database = "e_commerce"  # Sélectionne la base de données.
                   mycursor = self.cnx.cursor()  # Crée un nouveau curseur.
                   # mycursor.execute("INSERT INTO produits (nom, prix) VALUES ('Pizza', 1000)")  # Crée une table si elle n'existe pas.
-                  mycursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES ({values})")  # Crée une table si elle n'existe pas.
+                  mycursor.execute(f"INSERT INTO {table_name} {columns} VALUES {values}")  # Crée une table si elle n'existe pas.
             except Error as e:  # Si une erreur est survenue lors de la création de la table.
                   print(f"Erreur lors de l'insertion des données dans la table : {e}")  # Affiche un message d'erreur.
             
@@ -74,3 +74,12 @@ class BaseDeDonnees:  # Définit une classe BaseDeDonnees.
                   mycursor.execute(f"DROP TABLE {table_name}")  # Crée une table si elle n'existe pas.
             except Error as e:  # Si une erreur est survenue lors de la création de la table.
                   print(f"Erreur lors de la suppression de la table : {e}")  # Affiche un message d'erreur.
+
+      def select_table(self, table_name): # Méthode pour afficher tous les données de chaque table dans la base de données avec la commande SELECT
+            try:  # Essaie d'exécuter le bloc de code suivant.
+                  self.execute_query(f"CREATE DATABASE IF NOT EXISTS e_commerce")  # Crée une base de données si elle n'existe pas.
+                  self.cnx.database = "e_commerce"  # Sélectionne la base de données.
+                  mycursor = self.cnx.cursor()  # Crée un nouveau curseur.
+                  mycursor.execute(f"SELECT * FROM {table_name}")  # Crée une table si elle n'existe pas.
+            except Error as e:  # Si une erreur est survenue lors de la création de la table.
+                  print(f"Erreur lors de la selection des données dans la table : {e}")  # Affiche un message d'erreur.
