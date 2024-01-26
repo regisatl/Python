@@ -43,9 +43,7 @@ class BaseDeDonnees:  # Définit une classe BaseDeDonnees.
             query = f"CREATE TABLE {table_name} ("  # Débute la requête SQL pour créer une table.
             for column in columns:  # Pour chaque colonne dans la liste des colonnes.
                 query += column + ", "  # Ajoute la colonne à la requête SQL.
-            query = (
-                query[:-2] + ")"
-            )  # Enlève la dernière virgule et ajoute une parenthèse fermante.
+            query = (query[:-2] + ")" )  # Enlève la dernière virgule et ajoute une parenthèse fermante.
             mycursor.execute(query)  # Exécute la requête SQL.
             self.cnx.commit()  # Valide les modifications dans la base de données.
 
@@ -54,9 +52,10 @@ class BaseDeDonnees:  # Définit une classe BaseDeDonnees.
                   self.execute_query(f"CREATE DATABASE IF NOT EXISTS e_commerce")  # Crée une base de données si elle n'existe pas.
                   self.cnx.database = "e_commerce"  # Sélectionne la base de données.
                   mycursor = self.cnx.cursor()  # Crée un nouveau curseur.
+                  # mycursor.execute("INSERT INTO produits (nom, prix) VALUES ('Pizza', 1000)")  # Crée une table si elle n'existe pas.
                   mycursor.execute(f"INSERT INTO {table_name} ({columns}) VALUES ({values})")  # Crée une table si elle n'existe pas.
             except Error as e:  # Si une erreur est survenue lors de la création de la table.
-                  print(f"Erreur lors de l'ajout des données dans la table : {e}")  # Affiche un message d'erreur.
+                  print(f"Erreur lors de l'insertion des données dans la table : {e}")  # Affiche un message d'erreur.
             
       def update_table(self, table_name, columns, values, condition): # Méthode pour mettre à jour dans une table des données dans la base de données avec la commande UPDATE SET
             try:  # Essaie d'exécuter le bloc de code suivant.
